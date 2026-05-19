@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vidéos — Jordan Culot</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="../index.html" class="nav-logo">Jordan <em>Culot</em></a>
+  <div class="nav-links">
+    <a href="projets.html"    class="nav-link">Projets</a>
+    <a href="photos.html"     class="nav-link">Photos</a>
+    <a href="videos.html"     class="nav-link active">Vidéos</a>
+    <a href="animations.html" class="nav-link">Animations</a>
+    <a href="contact.html"    class="nav-link">Contact</a>
+  </div>
+</nav>
+
+<!-- VIDEOS -->
+<section id="videos" style="padding-top: 140px;">
+  <div class="section-header reveal">
+    <span class="section-num">III.</span>
+    <h2 class="section-title">Pro<em>duction</em> Vidéo</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="videos-grid">
+
+    <!-- PEPSI — Animation -->
+    <div class="v-card reveal" onclick="openVid('pepsi')">
+      <div class="v-thumb">
+        <div class="v-thumb-bg" style="background:linear-gradient(135deg,#001a8a,#c80000)">
+          <<video src="../animations/pepsi.mp4" 
+       poster="../images/thumbs/pepsi.jpg"
+       muted loop preload="metadata"
+       onmouseover="this.play()" 
+       onmouseout="this.pause();this.currentTime=0;">
+</video>
+        </div>
+        <div class="v-play"><div class="v-play-circle"><div class="v-play-tri"></div></div></div>
+        <div class="v-dur">Spot</div>
+      </div>
+      <div class="v-body">
+        <div class="v-title"> Pepsi</div>
+        <div class="v-meta"><span>Publicité</span><span>Premiere Pro</span><span>2024</span></div>
+      </div>
+    </div>
+
+    <!-- montage supernatural-->
+    <div class="v-card reveal" onclick="openVid('doc')">
+      <div class="v-thumb">
+        <div class="v-thumb-bg" style="background:linear-gradient(135deg,#e8e0d0,#c8b898)">🎬</div>
+        <video src="../animations/Videosupernatural.mov" muted loop preload="metadata"></video>
+        <div class="v-play"><div class="v-play-circle"><div class="v-play-tri"></div></div>
+        <div class="v-dur">05:24</div>
+      </div>
+      <div class="v-body">
+        <div class="v-title">Valo</div>
+        <div class="v-meta"><span>Documentaire</span><span>Premiere Pro</span><span>2024</span></div>
+      </div>
+    </div>
+
+    <!-- Motion Design -->
+    <div class="v-card reveal" onclick="openVid('motion')">
+      <div class="v-thumb">
+        <div class="v-thumb-bg" style="background:linear-gradient(135deg,#e0d8f0,#c0b0d8)">✨</div>
+        <div class="v-play"><div class="v-play-circle"><div class="v-play-tri"></div></div></div>
+        <div class="v-dur">00:32</div>
+      </div>
+      <div class="v-body">
+        <div class="v-title">Motion Design — Intro Animée</div>
+        <div class="v-meta"><span>Motion</span><span>After Effects</span><span>2024</span></div>
+      </div>
+    </div>
+
+    <!-- Showreel -->
+    <div class="v-card reveal" onclick="openVid('showreel')">
+      <div class="v-thumb">
+        <div class="v-thumb-bg" style="background:linear-gradient(135deg,#d8e8d8,#b8d0b8)">🎯</div>
+        <div class="v-play"><div class="v-play-circle"><div class="v-play-tri"></div></div></div>
+        <div class="v-dur">02:15</div>
+      </div>
+      <div class="v-body">
+        <div class="v-title">Showreel 2024</div>
+        <div class="v-meta"><span>Compilation</span><span>After Effects</span><span>2024</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- VIDEO MODAL -->
+<div class="vmodal" id="vmodal">
+  <div class="vmodal-box">
+    <button class="vmodal-close" onclick="closeVid()">✕ Fermer</button>
+    <div class="vmodal-player" id="vmodalPlayer">
+      <!-- Contenu injecté dynamiquement -->
+    </div>
+  </div>
+</div>
+
+<div class="ornamental-divider">— ✦ —</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Jordan Culot</div>
+  <div class="footer-copy">© 2024 — BUT MMI · IUT de Troyes</div>
+  <div class="footer-socials">
+    <a href="#" class="fsocial">Instagram</a>
+    <a href="#" class="fsocial">Behance</a>
+    <a href="#" class="fsocial">GitHub</a>
+    <a href="#" class="fsocial">LinkedIn</a>
+  </div>
+</footer>
+
+<script>
+  // Reveal
+  const revObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(r => revObs.observe(r));
+
+  // Video modal
+  const videoData = {
+    pepsi: {
+      title: 'Spot Publicitaire — Pepsi',
+      src: '../animations/pepsi.mp4',
+      type: 'video'
+    },
+    doc: {
+      title: 'Court Métrage Documentaire',
+      emoji: '🎬',
+      dur: '05:24',
+      type: 'placeholder'
+    },
+    motion: {
+      title: 'Motion Design — Intro Animée',
+      emoji: '✨',
+      dur: '00:32',
+      type: 'placeholder'
+    },
+    showreel: {
+      title: 'Showreel 2024',
+      emoji: '🎯',
+      dur: '02:15',
+      type: 'placeholder'
+    }
+  };
+
+  function openVid(key) {
+    const v = videoData[key];
+    const player = document.getElementById('vmodalPlayer');
+
+    if (v.type === 'video') {
+      player.innerHTML = `<video controls autoplay style="width:100%;display:block;max-height:70vh;">
+        <source src="${v.src}" type="video/mp4">
+      </video>`;
+    } else {
+      player.innerHTML = `
+        <div style="padding-bottom:56.25%;position:relative;background:var(--parchment);">
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;">
+            <div style="font-size:72px">${v.emoji}</div>
+            <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--ink);font-style:italic;">${v.title}</div>
+            <div style="font-family:'Josefin Sans';font-size:10px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;">Durée : ${v.dur}</div>
+            <div style="font-family:'Josefin Sans';font-size:10px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;padding:8px 16px;border:1px solid var(--gold);border-radius:2px;margin-top:8px;">▶ Remplace par ton lien vidéo</div>
+          </div>
+        </div>`;
+    }
+
+    document.getElementById('vmodal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeVid() {
+    const player = document.getElementById('vmodalPlayer');
+    // Stop video if playing
+    const vid = player.querySelector('video');
+    if (vid) { vid.pause(); vid.src = ''; }
+    player.innerHTML = '';
+    document.getElementById('vmodal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('vmodal').addEventListener('click', function(e) {
+    if (e.target === this) closeVid();
+  });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeVid(); });
+</script>
+</body>
+</html>

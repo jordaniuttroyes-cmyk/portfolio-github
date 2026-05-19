@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jordan Culot — Portfolio MMI</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ─── HERO SPECIFIC ─── */
+    #hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 120px 56px 80px;
+      position: relative; overflow: hidden;
+    }
+
+    .hero-blob {
+      position: absolute; border-radius: 50%;
+      filter: blur(80px); opacity: 0.18; pointer-events: none;
+    }
+    .blob-1 { width: 500px; height: 500px; background: var(--gold2); top: -100px; right: -80px; }
+    .blob-2 { width: 350px; height: 350px; background: #c8a060; bottom: 0; left: 100px; opacity: 0.12; }
+    .blob-3 { width: 200px; height: 200px; background: var(--brown2); top: 40%; right: 30%; opacity: 0.08; }
+
+    .corner-tl, .corner-br {
+      position: absolute; width: 120px; height: 120px; pointer-events: none;
+    }
+    .corner-tl { top: 80px; left: 40px; border-top: 1px solid var(--gold); border-left: 1px solid var(--gold); }
+    .corner-br { bottom: 40px; right: 40px; border-bottom: 1px solid var(--gold); border-right: 1px solid var(--gold); }
+
+    .hero-eyebrow {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 11px; font-weight: 400; letter-spacing: 5px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 28px;
+      display: flex; align-items: center; gap: 16px;
+      opacity: 0; animation: fadeUp 0.8s 0.2s ease forwards;
+    }
+    .hero-eyebrow::before { content: ''; width: 48px; height: 1px; background: var(--gold); }
+
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(72px, 10vw, 140px);
+      font-weight: 900; line-height: 0.92;
+      letter-spacing: -2px; color: var(--ink);
+      margin-bottom: 24px;
+      opacity: 0; animation: fadeUp 0.9s 0.35s ease forwards;
+    }
+    .hero-name .italic { font-style: italic; color: var(--gold); }
+    .hero-name .outline { color: transparent; -webkit-text-stroke: 1.5px var(--ink); }
+
+    .hero-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(18px, 2.5vw, 26px);
+      font-weight: 300; font-style: italic;
+      color: var(--brown); max-width: 560px;
+      line-height: 1.6; margin-bottom: 40px;
+      opacity: 0; animation: fadeUp 0.9s 0.5s ease forwards;
+    }
+
+    .hero-meta {
+      display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 48px;
+      opacity: 0; animation: fadeUp 0.9s 0.65s ease forwards;
+    }
+    .meta-item {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--muted); display: flex; align-items: center; gap: 8px;
+    }
+    .meta-dot { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; flex-shrink: 0; }
+
+    .hero-skills {
+      display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 56px;
+      opacity: 0; animation: fadeUp 0.9s 0.8s ease forwards;
+    }
+    .skill-pill {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+      padding: 8px 18px; border: 1px solid var(--gold);
+      color: var(--gold); background: rgba(184,151,58,0.06);
+      border-radius: 2px; transition: all 0.25s;
+    }
+    .skill-pill:hover { background: var(--gold); color: var(--cream); }
+
+    .hero-ctas {
+      display: flex; gap: 16px; flex-wrap: wrap;
+      opacity: 0; animation: fadeUp 0.9s 0.95s ease forwards;
+    }
+
+    .hero-deco-line {
+      position: absolute; right: 56px; top: 50%;
+      transform: translateY(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 12px;
+      opacity: 0; animation: fadeIn 1s 1.2s ease forwards;
+    }
+    .deco-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 11px; color: var(--muted);
+      writing-mode: vertical-rl; letter-spacing: 3px;
+    }
+    .deco-vline { width: 1px; height: 80px; background: linear-gradient(to bottom, var(--gold), transparent); }
+
+    /* ─── APERÇU SECTIONS ─── */
+    .apercu-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+      padding: 60px 56px;
+    }
+    .apercu-card {
+      background: #fff; border: 1px solid var(--border); border-radius: 4px;
+      padding: 28px 24px; text-decoration: none; color: var(--ink);
+      transition: all 0.3s; box-shadow: 0 2px 12px var(--shadow);
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .apercu-card:hover { transform: translateY(-6px); border-color: var(--gold); box-shadow: 0 16px 40px var(--shadow); }
+    .apercu-icon { font-size: 32px; }
+    .apercu-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 11px; font-style: italic; color: var(--gold); letter-spacing: 2px;
+    }
+    .apercu-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px; font-weight: 700; letter-spacing: -0.5px;
+    }
+    .apercu-desc {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14px; color: var(--muted); font-style: italic; line-height: 1.5;
+    }
+    .apercu-arrow {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--gold); margin-top: auto;
+    }
+
+    @media (max-width: 960px) {
+      #hero { padding: 100px 24px 60px; }
+      .hero-deco-line { display: none; }
+      .apercu-grid { grid-template-columns: 1fr 1fr; padding: 40px 24px; }
+    }
+    @media (max-width: 480px) {
+      .apercu-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">Jordan <em>Culot</em></a>
+  <div class="nav-links">
+    <a href="pages/projets.html"    class="nav-link">Projets</a>
+    <a href="pages/photos.html"     class="nav-link">Photos</a>
+    <a href="pages/videos.html"     class="nav-link">Vidéos</a>
+    <a href="pages/animations.html" class="nav-link">Animations</a>
+    <a href="pages/contact.html"    class="nav-link">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-blob blob-1"></div>
+  <div class="hero-blob blob-2"></div>
+  <div class="hero-blob blob-3"></div>
+  <div class="corner-tl"></div>
+  <div class="corner-br"></div>
+
+  <div class="hero-eyebrow">Étudiant BUT MMI — IUT de Troyes</div>
+
+  <h1 class="hero-name">
+    <span class="outline">Jordan</span><br>
+    <span class="italic">Culot</span>
+  </h1>
+
+  <p class="hero-tagline">
+    Métiers du Multimédia &amp; de l'Internet —<br>
+    Création de contenu, design web &amp; développement digital.
+  </p>
+
+  <div class="hero-meta">
+    <div class="meta-item"><div class="meta-dot"></div> IUT de Troyes · URCA</div>
+    <div class="meta-item"><div class="meta-dot"></div> Troyes, France</div>
+    <div class="meta-item"><div class="meta-dot"></div> Disponible en stage / alternance</div>
+  </div>
+
+  <div class="hero-skills">
+    <span class="skill-pill">Création de Contenu</span>
+    <span class="skill-pill">Web Design</span>
+    <span class="skill-pill">Communication Digitale</span>
+    <span class="skill-pill">Développement Web</span>
+    <span class="skill-pill">Illustration</span>
+    <span class="skill-pill">Photographie</span>
+  </div>
+
+  <div class="hero-ctas">
+    <a href="pages/projets.html" class="btn-gold">Voir mes projets</a>
+    <a href="pages/contact.html" class="btn-outline">Me contacter</a>
+  </div>
+
+  <div class="hero-deco-line">
+    <div class="deco-num">Portfolio 2024</div>
+    <div class="deco-vline"></div>
+  </div>
+</section>
+
+<div class="ornamental-divider">— ✦ —</div>
+
+<!-- APERÇU DES SECTIONS -->
+<div class="apercu-grid">
+  <a href="pages/projets.html" class="apercu-card reveal">
+    <div class="apercu-num">I.</div>
+    <div class="apercu-title">Projets</div>
+    <div class="apercu-desc">Illustrations, design web, identités visuelles et créations numériques.</div>
+    <div class="apercu-arrow">Découvrir →</div>
+  </a>
+  <a href="pages/photos.html" class="apercu-card reveal">
+    <div class="apercu-num">II.</div>
+    <div class="apercu-title">Photographie</div>
+    <div class="apercu-desc">Voyages en Suède, paysages nordiques, architecture et street photography.</div>
+    <div class="apercu-arrow">Découvrir →</div>
+  </a>
+  <a href="pages/videos.html" class="apercu-card reveal">
+    <div class="apercu-num">III.</div>
+    <div class="apercu-title">Vidéos</div>
+    <div class="apercu-desc">Spots publicitaires, courts métrages, motion design et clips expérimentaux.</div>
+    <div class="apercu-arrow">Découvrir →</div>
+  </a>
+  <a href="pages/animations.html" class="apercu-card reveal">
+    <div class="apercu-num">IV.</div>
+    <div class="apercu-title">Animations</div>
+    <div class="apercu-desc">Effets CSS avancés, animations JavaScript et expériences interactives.</div>
+    <div class="apercu-arrow">Découvrir →</div>
+  </a>
+</div>
+
+<div class="ornamental-divider">— ✦ —</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Jordan Culot</div>
+  <div class="footer-copy">© 2024 — BUT MMI · IUT de Troyes — Tous droits réservés</div>
+  <div class="footer-socials">
+    <a href="#" class="fsocial">Instagram</a>
+    <a href="#" class="fsocial">Behance</a>
+    <a href="#" class="fsocial">GitHub</a>
+    <a href="#" class="fsocial">LinkedIn</a>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const revEls = document.querySelectorAll('.reveal');
+  const revObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+  }, { threshold: 0.1 });
+  revEls.forEach(r => revObs.observe(r));
+</script>
+</body>
+</html>
