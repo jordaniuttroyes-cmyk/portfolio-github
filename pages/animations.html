@@ -5,19 +5,53 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Animations — Jordan Culot</title>
   <link rel="stylesheet" href="../style.css">
+  <style>
+    /* ─── MOBILE NAV ─── */
+    .nav-toggle {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; background: none; border: none; padding: 4px;
+    }
+    .nav-toggle span { display: block; width: 22px; height: 1.5px; background: var(--ink); transition: all 0.3s; }
+    @media (max-width: 960px) {
+      .nav-toggle { display: flex; }
+      .nav-links {
+        display: none; position: absolute;
+        top: 100%; left: 0; right: 0;
+        background: rgba(245,240,232,0.97); backdrop-filter: blur(16px);
+        border-bottom: 1px solid var(--border);
+        flex-direction: column; padding: 16px 24px; gap: 0;
+      }
+      .nav-links.open { display: flex; }
+      .nav-link { padding: 14px 0; border-bottom: 1px solid var(--border); }
+    }
+
+    @keyframes typing {
+      from { width: 0; }
+      to   { width: 180px; }
+    }
+    @keyframes loadbar {
+      0%   { transform: scaleX(0); transform-origin: left; }
+      50%  { transform: scaleX(1); transform-origin: left; }
+      51%  { transform: scaleX(1); transform-origin: right; }
+      100% { transform: scaleX(0); transform-origin: right; }
+    }
+  </style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav>
   <a href="../index.html" class="nav-logo">Jordan <em>Culot</em></a>
-  <div class="nav-links">
+  <div class="nav-links" id="navLinks">
     <a href="projets.html"    class="nav-link">Projets</a>
     <a href="photos.html"     class="nav-link">Photos</a>
     <a href="videos.html"     class="nav-link">Vidéos</a>
     <a href="animations.html" class="nav-link active">Animations</a>
     <a href="contact.html"    class="nav-link">Contact</a>
   </div>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <!-- ANIMATIONS -->
@@ -86,7 +120,7 @@
       <div class="anim-tech">CSS · Steps · Width animation</div>
     </div>
 
-    <!-- Particle counter -->
+    <!-- Particles -->
     <div class="anim-card reveal">
       <div class="anim-preview" style="position:relative;overflow:hidden;" id="particleWrap"></div>
       <div class="anim-name">Particules Flottantes</div>
@@ -97,7 +131,7 @@
     <div class="anim-card reveal">
       <div class="anim-preview" style="flex-direction:column;gap:12px;">
         <div style="width:80%;height:3px;background:var(--border);border-radius:2px;overflow:hidden;">
-          <div style="height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));animation:loadbar 2s ease-in-out infinite;transform-origin:left;"></div>
+          <div style="height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));animation:loadbar 2s ease-in-out infinite;"></div>
         </div>
         <div style="font-family:'Josefin Sans',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);" id="loadingPct">0%</div>
       </div>
@@ -108,24 +142,12 @@
   </div>
 </section>
 
-<style>
-  @keyframes typing {
-    from { width: 0; }
-    to   { width: 180px; }
-  }
-  @keyframes loadbar {
-    0%   { transform: scaleX(0); }
-    50%  { transform: scaleX(1); }
-    100% { transform: scaleX(0); transform-origin: right; }
-  }
-</style>
-
 <div class="ornamental-divider">— ✦ —</div>
 
 <!-- FOOTER -->
 <footer>
   <div class="footer-brand">Jordan Culot</div>
-  <div class="footer-copy">© 2024 — BUT MMI · IUT de Troyes</div>
+  <div class="footer-copy">© 2024 — BUT MMI · IUT de Troyes — Tous droits réservés</div>
   <div class="footer-socials">
     <a href="#" class="fsocial">Instagram</a>
     <a href="#" class="fsocial">Behance</a>
@@ -135,6 +157,11 @@
 </footer>
 
 <script>
+  // Mobile nav
+  document.getElementById('navToggle').addEventListener('click', function() {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+
   // Reveal
   const revObs = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
@@ -146,7 +173,7 @@
 
   // Ink drops
   const inkWrap = document.getElementById('inkWrap');
-  const inkColors = ['rgba(184,151,58,0.35)', 'rgba(90,60,20,0.25)', 'rgba(122,85,48,0.3)', 'rgba(184,151,58,0.2)'];
+  const inkColors = ['rgba(184,151,58,0.35)','rgba(90,60,20,0.25)','rgba(122,85,48,0.3)','rgba(184,151,58,0.2)'];
   function spawnDrop() {
     const d = document.createElement('div');
     d.className = 'inkdrop';
@@ -163,31 +190,22 @@
     const p = document.createElement('div');
     const s = 4 + Math.random() * 6;
     p.style.cssText = `
-      position:absolute;
-      width:${s}px; height:${s}px;
-      background:var(--gold);
-      border-radius:50%;
-      left:${Math.random()*90}%;
-      top:${Math.random()*90}%;
-      opacity:${0.3 + Math.random() * 0.5};
-      animation: float${i} ${3+Math.random()*4}s ease-in-out infinite alternate;
+      position:absolute; width:${s}px; height:${s}px;
+      background:var(--gold); border-radius:50%;
+      left:${Math.random()*90}%; top:${Math.random()*90}%;
+      opacity:${0.3+Math.random()*0.5};
+      animation:pfloat${i} ${3+Math.random()*4}s ease-in-out infinite alternate;
     `;
-    const style = document.createElement('style');
-    style.textContent = `@keyframes float${i} {
-      from { transform: translate(0,0); }
-      to   { transform: translate(${(Math.random()-0.5)*30}px, ${(Math.random()-0.5)*30}px); }
-    }`;
-    document.head.appendChild(style);
+    const st = document.createElement('style');
+    st.textContent = `@keyframes pfloat${i}{from{transform:translate(0,0)}to{transform:translate(${(Math.random()-.5)*30}px,${(Math.random()-.5)*30}px)}}`;
+    document.head.appendChild(st);
     pWrap.appendChild(p);
   }
 
   // Loading counter
   let pct = 0;
   const lPct = document.getElementById('loadingPct');
-  setInterval(() => {
-    pct = (pct + 1) % 101;
-    lPct.textContent = pct + '%';
-  }, 20);
+  setInterval(() => { pct = (pct + 1) % 101; lPct.textContent = pct + '%'; }, 20);
 </script>
 </body>
 </html>

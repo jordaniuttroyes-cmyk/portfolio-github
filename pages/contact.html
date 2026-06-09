@@ -5,19 +5,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact — Jordan Culot</title>
   <link rel="stylesheet" href="../style.css">
+  <style>
+    /* ─── MOBILE NAV ─── */
+    .nav-toggle {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; background: none; border: none; padding: 4px;
+    }
+    .nav-toggle span { display: block; width: 22px; height: 1.5px; background: var(--ink); transition: all 0.3s; }
+    @media (max-width: 960px) {
+      .nav-toggle { display: flex; }
+      .nav-links {
+        display: none; position: absolute;
+        top: 100%; left: 0; right: 0;
+        background: rgba(245,240,232,0.97); backdrop-filter: blur(16px);
+        border-bottom: 1px solid var(--border);
+        flex-direction: column; padding: 16px 24px; gap: 0;
+      }
+      .nav-links.open { display: flex; }
+      .nav-link { padding: 14px 0; border-bottom: 1px solid var(--border); }
+    }
+  </style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav>
   <a href="../index.html" class="nav-logo">Jordan <em>Culot</em></a>
-  <div class="nav-links">
+  <div class="nav-links" id="navLinks">
     <a href="projets.html"    class="nav-link">Projets</a>
     <a href="photos.html"     class="nav-link">Photos</a>
     <a href="videos.html"     class="nav-link">Vidéos</a>
     <a href="animations.html" class="nav-link">Animations</a>
     <a href="contact.html"    class="nav-link active">Contact</a>
   </div>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <!-- CONTACT -->
@@ -72,7 +95,7 @@
         </div>
       </div>
 
-      <!-- Infos de contact directes -->
+      <!-- Coordonnées -->
       <div class="reveal" style="display:flex;flex-direction:column;gap:12px;margin-top:8px;">
         <div style="font-family:'Josefin Sans',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;">Coordonnées</div>
         <a href="mailto:jordan.culot@etudiant.univ-reims.fr" style="font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:10px;transition:color 0.2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--ink)'">
@@ -124,6 +147,11 @@
 </footer>
 
 <script>
+  // Mobile nav
+  document.getElementById('navToggle').addEventListener('click', function() {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+
   // Reveal + skill bars
   const revObs = new IntersectionObserver(entries => {
     entries.forEach(e => {

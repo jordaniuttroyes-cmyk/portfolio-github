@@ -5,19 +5,207 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vidéos — Jordan Culot</title>
   <link rel="stylesheet" href="../style.css">
+  <style>
+    /* ─── MOBILE NAV ─── */
+    .nav-toggle {
+      display: none;
+      flex-direction: column; gap: 5px; cursor: pointer;
+      background: none; border: none; padding: 4px;
+    }
+    .nav-toggle span {
+      display: block; width: 22px; height: 1.5px;
+      background: var(--ink); transition: all 0.3s;
+    }
+    @media (max-width: 960px) {
+      .nav-toggle { display: flex; }
+      .nav-links {
+        display: none; position: absolute;
+        top: 100%; left: 0; right: 0;
+        background: rgba(245,240,232,0.97);
+        backdrop-filter: blur(16px);
+        border-bottom: 1px solid var(--border);
+        flex-direction: column; padding: 16px 24px; gap: 0;
+      }
+      .nav-links.open { display: flex; }
+      .nav-link { padding: 14px 0; border-bottom: 1px solid var(--border); }
+    }
+
+    /* ─── VIDEO GRID ─── */
+    .videos-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px;
+    }
+
+    /* ─── VIDEO CARD ─── */
+    .v-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.35s, box-shadow 0.35s, border-color 0.35s;
+      box-shadow: 0 2px 12px var(--shadow);
+    }
+    .v-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 48px var(--shadow);
+      border-color: var(--gold);
+    }
+
+    /* ─── THUMBNAIL ─── */
+    .v-thumb {
+      position: relative;
+      padding-bottom: 56.25%;
+      overflow: hidden;
+      background: var(--ink);
+    }
+    .v-yt-thumb {
+      position: absolute; inset: 0;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.5s, filter 0.3s;
+    }
+    .v-card:hover .v-yt-thumb {
+      transform: scale(1.04);
+      filter: brightness(0.75);
+    }
+    .v-thumb-gradient {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(42,31,15,0.6) 0%, transparent 50%);
+    }
+
+    /* ─── PLAY BUTTON ─── */
+    .v-play-btn {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 2;
+    }
+    .v-play-circle {
+      width: 64px; height: 64px; border-radius: 50%;
+      background: var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.3s, transform 0.2s;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.35);
+    }
+    .v-card:hover .v-play-circle {
+      background: var(--brown);
+      transform: scale(1.08);
+    }
+    .v-play-tri {
+      width: 0; height: 0;
+      border-top: 10px solid transparent;
+      border-bottom: 10px solid transparent;
+      border-left: 18px solid #fff;
+      margin-left: 4px;
+    }
+
+    /* ─── BADGE type/durée ─── */
+    .v-badge {
+      position: absolute; bottom: 12px; right: 12px;
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 10px; letter-spacing: 1px;
+      background: rgba(42,31,15,0.82);
+      color: var(--cream); padding: 4px 10px; border-radius: 2px;
+      z-index: 2;
+    }
+    .v-badge-type {
+      position: absolute; bottom: 12px; left: 12px;
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+      background: var(--gold); color: var(--cream);
+      padding: 4px 10px; border-radius: 2px; z-index: 2;
+    }
+
+    /* ─── CARD BODY ─── */
+    .v-body { padding: 22px 24px 26px; }
+    .v-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px; font-weight: 700;
+      color: var(--ink); margin-bottom: 6px; letter-spacing: -0.5px;
+    }
+    .v-desc {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 15px; color: var(--muted);
+      font-style: italic; line-height: 1.65;
+      margin-bottom: 14px;
+    }
+    .v-meta {
+      display: flex; gap: 0;
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 10px; color: var(--muted);
+      letter-spacing: 1.5px; text-transform: uppercase;
+    }
+    .v-meta span { display: flex; align-items: center; gap: 6px; }
+    .v-meta span + span::before {
+      content: '';
+      display: inline-block; width: 3px; height: 3px;
+      background: var(--gold); border-radius: 50; margin: 0 10px;
+    }
+
+    /* ─── YOUTUBE MODAL ─── */
+    .vmodal {
+      display: none; position: fixed; inset: 0;
+      background: rgba(10, 7, 3, 0.92);
+      z-index: 200; align-items: center; justify-content: center;
+      padding: 20px;
+    }
+    .vmodal.open { display: flex; }
+    .vmodal-box {
+      width: min(90vw, 960px);
+      background: var(--ink);
+      border: 1px solid rgba(184,151,58,0.2);
+      border-radius: 4px; overflow: hidden;
+      box-shadow: 0 40px 100px rgba(0,0,0,0.6);
+      position: relative;
+    }
+    .vmodal-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 20px;
+      border-bottom: 1px solid rgba(184,151,58,0.15);
+    }
+    .vmodal-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px; font-style: italic; color: var(--cream);
+    }
+    .vmodal-close {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+      background: transparent; color: var(--muted);
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 8px 16px; cursor: pointer; border-radius: 2px; transition: all 0.2s;
+    }
+    .vmodal-close:hover { color: var(--gold); border-color: var(--gold); }
+    .vmodal-player {
+      position: relative; padding-bottom: 56.25%; background: #000;
+    }
+    .vmodal-player iframe {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; border: none;
+      display: block;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      .videos-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav>
   <a href="../index.html" class="nav-logo">Jordan <em>Culot</em></a>
-  <div class="nav-links">
+  <div class="nav-links" id="navLinks">
     <a href="projets.html"    class="nav-link">Projets</a>
     <a href="photos.html"     class="nav-link">Photos</a>
     <a href="videos.html"     class="nav-link active">Vidéos</a>
     <a href="animations.html" class="nav-link">Animations</a>
     <a href="contact.html"    class="nav-link">Contact</a>
   </div>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <!-- VIDEOS -->
@@ -30,63 +218,95 @@
 
   <div class="videos-grid">
 
-    <!-- PEPSI — Animation -->
+    <!-- PEPSI -->
     <div class="v-card reveal" onclick="openVid('pepsi')">
       <div class="v-thumb">
-        <div class="v-thumb-bg" style="background:linear-gradient(135deg,#001a8a,#c80000)">
-          <<video src="../animations/pepsi.mp4" 
-       poster="../images/thumbs/pepsi.jpg"
-       muted loop preload="metadata"
-       onmouseover="this.play()" 
-       onmouseout="this.pause();this.currentTime=0;">
-</video>
+        <div class="v-yt-thumb" style="background-image: url('https://img.youtube.com/vi/rPnf3pmz3gw/maxresdefault.jpg');"></div>
+        <div class="v-thumb-gradient"></div>
+        <div class="v-play-btn">
+          <div class="v-play-circle"><div class="v-play-tri"></div></div>
         </div>
-        <div class="v-play"><div class="v-play-circle"><div class="v-play-tri"></div></div></div>
-        <div class="v-dur">Spot</div>
+        <div class="v-badge-type">Publicité</div>
+        <div class="v-badge">YouTube</div>
       </div>
       <div class="v-body">
-        <div class="v-title"> Pepsi</div>
-        <div class="v-meta"><span>Publicité</span><span>Premiere Pro</span><span>2024</span></div>
+        <div class="v-title">Spot Publicitaire — Pepsi</div>
+        <div class="v-desc">Conception et montage d'un spot publicitaire fictif pour la marque Pepsi. Travail sur le rythme, les transitions et l'identité visuelle de la marque.</div>
+        <div class="v-meta">
+          <span>Premiere Pro</span>
+          <span>Montage</span>
+          <span>2024</span>
+        </div>
       </div>
     </div>
 
-    <!-- montage supernatural-->
-    <div class="v-card reveal" onclick="openVid('doc')">
+    <!-- VALO / SUPERNATURAL -->
+    <div class="v-card reveal" onclick="openVid('valo')">
       <div class="v-thumb">
-        <div class="v-thumb-bg" style="background:linear-gradient(135deg,#e8e0d0,#c8b898)">🎬</div>
-        <video src="../animations/Videosupernatural.mov" muted loop preload="metadata"></video>
-        <div class="v-play"><div class="v-play-circle"><div class="v-play-tri"></div></div>
-        <div class="v-dur">05:24</div>
+        <div class="v-yt-thumb" style="background-image: url('https://img.youtube.com/vi/fIRQRpvKx4s/maxresdefault.jpg');"></div>
+        <div class="v-thumb-gradient"></div>
+        <div class="v-play-btn">
+          <div class="v-play-circle"><div class="v-play-tri"></div></div>
+        </div>
+        <div class="v-badge-type">Montage</div>
+        <div class="v-badge">YouTube</div>
       </div>
       <div class="v-body">
-        <div class="v-title">Valo</div>
-        <div class="v-meta"><span>Documentaire</span><span>Premiere Pro</span><span>2024</span></div>
+        <div class="v-title">Valo — Montage Cinématique</div>
+        <div class="v-desc">Montage vidéo sur la série Supernatural avec une direction artistique soignée. Synchronisation musicale et effets de transition travaillés.</div>
+        <div class="v-meta">
+          <span>Premiere Pro</span>
+          <span>Montage</span>
+          <span>2024</span>
+        </div>
       </div>
     </div>
 
-    <!-- Motion Design -->
+    <!-- MOTION DESIGN (placeholder) -->
     <div class="v-card reveal" onclick="openVid('motion')">
       <div class="v-thumb">
-        <div class="v-thumb-bg" style="background:linear-gradient(135deg,#e0d8f0,#c0b0d8)">✨</div>
-        <div class="v-play"><div class="v-play-circle"><div class="v-play-tri"></div></div></div>
-        <div class="v-dur">00:32</div>
+        <div class="v-yt-thumb" style="background: linear-gradient(135deg, #2a1f4a, #7a4a9a); display:flex; align-items:center; justify-content:center; position:absolute; inset:0;">
+          <span style="font-size: 56px; opacity:0.4;">✨</span>
+        </div>
+        <div class="v-thumb-gradient"></div>
+        <div class="v-play-btn">
+          <div class="v-play-circle"><div class="v-play-tri"></div></div>
+        </div>
+        <div class="v-badge-type">Motion</div>
+        <div class="v-badge">À venir</div>
       </div>
       <div class="v-body">
         <div class="v-title">Motion Design — Intro Animée</div>
-        <div class="v-meta"><span>Motion</span><span>After Effects</span><span>2024</span></div>
+        <div class="v-desc">Création d'une séquence d'introduction animée. Travail sur le timing, l'easing et la fluidité des transitions en After Effects.</div>
+        <div class="v-meta">
+          <span>After Effects</span>
+          <span>Motion</span>
+          <span>2024</span>
+        </div>
       </div>
     </div>
 
-    <!-- Showreel -->
+    <!-- SHOWREEL (placeholder) -->
     <div class="v-card reveal" onclick="openVid('showreel')">
       <div class="v-thumb">
-        <div class="v-thumb-bg" style="background:linear-gradient(135deg,#d8e8d8,#b8d0b8)">🎯</div>
-        <div class="v-play"><div class="v-play-circle"><div class="v-play-tri"></div></div></div>
-        <div class="v-dur">02:15</div>
+        <div class="v-yt-thumb" style="background: linear-gradient(135deg, #1a2a1a, #3a6a3a); display:flex; align-items:center; justify-content:center; position:absolute; inset:0;">
+          <span style="font-size: 56px; opacity:0.4;">🎬</span>
+        </div>
+        <div class="v-thumb-gradient"></div>
+        <div class="v-play-btn">
+          <div class="v-play-circle"><div class="v-play-tri"></div></div>
+        </div>
+        <div class="v-badge-type">Showreel</div>
+        <div class="v-badge">À venir</div>
       </div>
       <div class="v-body">
         <div class="v-title">Showreel 2024</div>
-        <div class="v-meta"><span>Compilation</span><span>After Effects</span><span>2024</span></div>
+        <div class="v-desc">Compilation de mes meilleures réalisations audiovisuelles de l'année. Publicités, courts-métrages et projets de motion design.</div>
+        <div class="v-meta">
+          <span>After Effects</span>
+          <span>Compilation</span>
+          <span>2024</span>
+        </div>
       </div>
     </div>
 
@@ -96,10 +316,11 @@
 <!-- VIDEO MODAL -->
 <div class="vmodal" id="vmodal">
   <div class="vmodal-box">
-    <button class="vmodal-close" onclick="closeVid()">✕ Fermer</button>
-    <div class="vmodal-player" id="vmodalPlayer">
-      <!-- Contenu injecté dynamiquement -->
+    <div class="vmodal-header">
+      <div class="vmodal-title" id="vmodalTitle"></div>
+      <button class="vmodal-close" onclick="closeVid()">✕ Fermer</button>
     </div>
+    <div class="vmodal-player" id="vmodalPlayer"></div>
   </div>
 </div>
 
@@ -108,7 +329,7 @@
 <!-- FOOTER -->
 <footer>
   <div class="footer-brand">Jordan Culot</div>
-  <div class="footer-copy">© 2024 — BUT MMI · IUT de Troyes</div>
+  <div class="footer-copy">© 2024 — BUT MMI · IUT de Troyes — Tous droits réservés</div>
   <div class="footer-socials">
     <a href="#" class="fsocial">Instagram</a>
     <a href="#" class="fsocial">Behance</a>
@@ -118,55 +339,60 @@
 </footer>
 
 <script>
-  // Reveal
+  // ─── Mobile nav ───
+  document.getElementById('navToggle').addEventListener('click', function() {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+
+  // ─── Scroll reveal ───
   const revObs = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(r => revObs.observe(r));
 
-  // Video modal
+  // ─── Video data ───
   const videoData = {
     pepsi: {
       title: 'Spot Publicitaire — Pepsi',
-      src: '../animations/pepsi.mp4',
-      type: 'video'
+      youtubeId: 'rPnf3pmz3gw'
     },
-    doc: {
-      title: 'Court Métrage Documentaire',
-      emoji: '🎬',
-      dur: '05:24',
-      type: 'placeholder'
+    valo: {
+      title: 'Valo — Montage Cinématique',
+      youtubeId: 'fIRQRpvKx4s'
     },
     motion: {
       title: 'Motion Design — Intro Animée',
-      emoji: '✨',
-      dur: '00:32',
-      type: 'placeholder'
+      youtubeId: null,
+      placeholder: { emoji: '✨', msg: 'Ajoute ici ton ID YouTube pour ce projet' }
     },
     showreel: {
       title: 'Showreel 2024',
-      emoji: '🎯',
-      dur: '02:15',
-      type: 'placeholder'
+      youtubeId: null,
+      placeholder: { emoji: '🎬', msg: 'Ajoute ici ton ID YouTube pour ce projet' }
     }
   };
 
   function openVid(key) {
     const v = videoData[key];
     const player = document.getElementById('vmodalPlayer');
+    document.getElementById('vmodalTitle').textContent = v.title;
 
-    if (v.type === 'video') {
-      player.innerHTML = `<video controls autoplay style="width:100%;display:block;max-height:70vh;">
-        <source src="${v.src}" type="video/mp4">
-      </video>`;
+    if (v.youtubeId) {
+      // YouTube embed avec autoplay
+      player.innerHTML = `<iframe
+        src="https://www.youtube.com/embed/${v.youtubeId}?autoplay=1&rel=0&modestbranding=1"
+        allow="autoplay; encrypted-media; fullscreen"
+        allowfullscreen>
+      </iframe>`;
     } else {
       player.innerHTML = `
-        <div style="padding-bottom:56.25%;position:relative;background:var(--parchment);">
-          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;">
-            <div style="font-size:72px">${v.emoji}</div>
-            <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--ink);font-style:italic;">${v.title}</div>
-            <div style="font-family:'Josefin Sans';font-size:10px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;">Durée : ${v.dur}</div>
-            <div style="font-family:'Josefin Sans';font-size:10px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;padding:8px 16px;border:1px solid var(--gold);border-radius:2px;margin-top:8px;">▶ Remplace par ton lien vidéo</div>
+        <div style="padding-bottom:56.25%;position:relative;background:var(--ink2);">
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:24px;text-align:center;">
+            <div style="font-size:56px;opacity:0.5">${v.placeholder.emoji}</div>
+            <div style="font-family:'Playfair Display',serif;font-size:20px;font-style:italic;color:var(--cream);">${v.title}</div>
+            <div style="font-family:'Josefin Sans',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);padding:10px 20px;border:1px solid var(--gold);border-radius:2px;">
+              ${v.placeholder.msg}
+            </div>
           </div>
         </div>`;
     }
@@ -176,15 +402,13 @@
   }
 
   function closeVid() {
-    const player = document.getElementById('vmodalPlayer');
-    // Stop video if playing
-    const vid = player.querySelector('video');
-    if (vid) { vid.pause(); vid.src = ''; }
-    player.innerHTML = '';
+    // Détruire l'iframe pour stopper la lecture YouTube
+    document.getElementById('vmodalPlayer').innerHTML = '';
     document.getElementById('vmodal').classList.remove('open');
     document.body.style.overflow = '';
   }
 
+  // Fermer en cliquant sur le fond ou Echap
   document.getElementById('vmodal').addEventListener('click', function(e) {
     if (e.target === this) closeVid();
   });

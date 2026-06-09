@@ -6,6 +6,25 @@
   <title>Projets — Jordan Culot</title>
   <link rel="stylesheet" href="../style.css">
   <style>
+    /* ─── MOBILE NAV ─── */
+    .nav-toggle {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; background: none; border: none; padding: 4px;
+    }
+    .nav-toggle span { display: block; width: 22px; height: 1.5px; background: var(--ink); transition: all 0.3s; }
+    @media (max-width: 960px) {
+      .nav-toggle { display: flex; }
+      .nav-links {
+        display: none; position: absolute;
+        top: 100%; left: 0; right: 0;
+        background: rgba(245,240,232,0.97); backdrop-filter: blur(16px);
+        border-bottom: 1px solid var(--border);
+        flex-direction: column; padding: 16px 24px; gap: 0;
+      }
+      .nav-links.open { display: flex; }
+      .nav-link { padding: 14px 0; border-bottom: 1px solid var(--border); }
+    }
+
     /* ─── LIGHTBOX PROJET ─── */
     .proj-lightbox {
       display: none;
@@ -133,13 +152,16 @@
 <!-- NAV -->
 <nav>
   <a href="../index.html" class="nav-logo">Jordan <em>Culot</em></a>
-  <div class="nav-links">
+  <div class="nav-links" id="navLinks">
     <a href="projets.html"    class="nav-link active">Projets</a>
     <a href="photos.html"     class="nav-link">Photos</a>
     <a href="videos.html"     class="nav-link">Vidéos</a>
     <a href="animations.html" class="nav-link">Animations</a>
     <a href="contact.html"    class="nav-link">Contact</a>
   </div>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <!-- PROJETS -->
@@ -299,6 +321,11 @@
 </footer>
 
 <script>
+  // ─── Mobile nav ───
+  document.getElementById('navToggle').addEventListener('click', function() {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+
   // ─── Reveal ───
   const revObs = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
