@@ -1,5 +1,0 @@
-*.mov
-*.mp4
-node_modules/
-dist/
-build/
