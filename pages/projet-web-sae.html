@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Site Web  SAÉ  Jordan Culot</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+    .nav-toggle span{display:block;width:22px;height:1.5px;background:var(--ink);transition:all 0.3s}
+    @media(max-width:960px){.nav-toggle{display:flex}.nav-links{display:none;position:absolute;top:100%;left:0;right:0;background:rgba(245,240,232,0.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);flex-direction:column;padding:16px 24px;gap:0}.nav-links.open{display:flex}.nav-link{padding:14px 0;border-bottom:1px solid var(--border)}}
+    .projet-hero{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+    .projet-hero-img{border-radius:4px;overflow:hidden;border:1px solid var(--border)}
+    .projet-hero-img img{width:100%;display:block;object-fit:cover}
+    .projet-back{display:inline-flex;align-items:center;gap:8px;font-family:'Josefin Sans',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);text-decoration:none;margin-bottom:32px;transition:gap 0.2s}
+    .projet-back:hover{gap:14px}
+    .projet-meta-row{display:flex;flex-wrap:wrap;gap:24px;margin-bottom:32px}
+    .projet-meta-label{font-family:'Josefin Sans',sans-serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+    .projet-meta-val{font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--ink2)}
+    .projet-title{font-family:'Playfair Display',serif;font-size:clamp(32px,4vw,52px);font-weight:700;color:var(--ink);line-height:1.1;margin-bottom:24px}
+    .projet-title em{color:var(--gold);font-style:italic}
+    .projet-desc{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--ink2);line-height:1.85;margin-bottom:40px}
+    .projet-tools-label{font-family:'Josefin Sans',sans-serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+    .projet-tools{display:flex;flex-wrap:wrap;gap:8px}
+    .projet-tool{font-family:'Josefin Sans',sans-serif;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;padding:6px 14px;border:1px solid var(--border);color:var(--muted);border-radius:2px}
+    @media(max-width:860px){.projet-hero{grid-template-columns:1fr;gap:40px}}
+  </style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Aller au contenu principal</a>
+<nav>
+  <a href="../index.html" class="nav-logo">Jordan <em>Culot</em></a>
+  <div class="nav-links" id="navLinks">
+    <a href="projets.html" class="nav-link active">Projets</a>
+    <a href="dessins.html" class="nav-link">Dessins</a>
+    <a href="photos.html" class="nav-link">Photos</a>
+    <a href="videos.html" class="nav-link">Vidéos</a>
+    <a href="animations.html" class="nav-link">Animations</a>
+    <a href="apropos.html" class="nav-link">À propos</a>
+    <a href="contact.html" class="nav-link">Contact</a>
+  </div>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<main id="main-content">
+<section style="padding-top:140px;">
+  <a href="projets.html" class="projet-back reveal">← Retour aux projets</a>
+  <div class="projet-hero">
+    <div class="projet-hero-img reveal">
+      <img src="../images/star_wars.png" alt="Site web SAÉ">
+    </div>
+    <div class="reveal">
+      <div class="projet-meta-row">
+        <div class="projet-meta-item">
+          <div class="projet-meta-label">Catégorie</div>
+          <div class="projet-meta-val">Développement web</div>
+        </div>
+        <div class="projet-meta-item">
+          <div class="projet-meta-label">Année</div>
+          <div class="projet-meta-val">2025</div>
+        </div>
+        <div class="projet-meta-item">
+          <div class="projet-meta-label">Type</div>
+          <div class="projet-meta-val">Projet universitaire  BUT MMI</div>
+        </div>
+      </div>
+      <h1 class="projet-title">Site Web  <em>SAÉ</em></h1>
+      <p class="projet-desc">Conception et développement d'un site web complet dans le cadre d'une SAÉ (Situation d'Apprentissage et d'Évaluation) universitaire.<br><br>Du brief initial à la mise en ligne : architecture de l'information, maquettage, intégration front-end et développement back-end avec base de données.</p>
+      <div class="projet-tools-label">Outils utilisés</div>
+      <div class="projet-tools"><span class="projet-tool">HTML</span><span class="projet-tool">CSS</span><span class="projet-tool">JavaScript</span><span class="projet-tool">PHP</span><span class="projet-tool">MySQL</span></div>
+    </div>
+  </div>
+</section>
+</main>
+<footer>
+  <div class="footer-brand">Jordan Culot</div>
+  <div class="footer-socials">
+    <a href="https://www.linkedin.com/in/jordan-culot-34a53b3ab" class="fsocial" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    <a href="https://github.com/" class="fsocial" target="_blank" rel="noopener noreferrer">GitHub</a>
+  </div>
+</footer>
+<script>
+  document.getElementById('navToggle').addEventListener('click',function(){const open=document.getElementById('navLinks').classList.toggle('open');this.setAttribute('aria-expanded',open)});
+  const revObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis')})},{threshold:0.05});
+  document.querySelectorAll('.reveal').forEach(r=>revObs.observe(r));
+</script>
+</body>
+</html>

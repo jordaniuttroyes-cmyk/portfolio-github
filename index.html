@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio de Jordan Culot, étudiant BUT MMI à l'IUT de Troyes  illustration, design, photo, vidéo.">
+  <meta name="robots" content="index, follow">
+  <title>Jordan Culot  Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 120px 56px 80px;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 11px; letter-spacing: 5px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 24px;
+      display: flex; align-items: center; gap: 16px;
+      opacity: 0; animation: fadeUp 0.8s 0.2s ease forwards;
+    }
+    .hero-eyebrow::before { content:''; width:40px; height:1px; background:var(--gold); flex-shrink:0; }
+
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(72px, 10vw, 140px);
+      font-weight: 900; line-height: 0.9;
+      letter-spacing: -2px; color: var(--ink);
+      margin-bottom: 28px;
+      opacity: 0; animation: fadeUp 0.9s 0.35s ease forwards;
+    }
+    .hero-name .italic { font-style: italic; color: var(--gold); }
+    .hero-name .outline { color: transparent; -webkit-text-stroke: 1.5px var(--ink); }
+
+    .hero-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(17px, 2vw, 22px);
+      font-weight: 300; font-style: italic;
+      color: var(--brown); max-width: 480px;
+      line-height: 1.65; margin-bottom: 48px;
+      opacity: 0; animation: fadeUp 0.9s 0.5s ease forwards;
+    }
+
+    .hero-ctas {
+      display: flex; gap: 14px; flex-wrap: wrap;
+      opacity: 0; animation: fadeUp 0.9s 0.65s ease forwards;
+    }
+
+    /* Navigation grid */
+    .nav-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border-top: 1px solid var(--border);
+    }
+
+    .nav-tile {
+      background: var(--cream);
+      padding: 40px 32px;
+      text-decoration: none; color: var(--ink);
+      transition: background 0.25s;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .nav-tile:hover { background: #fff; }
+
+    .nav-tile-num {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--gold); opacity: 0.7;
+    }
+    .nav-tile-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px; font-weight: 700;
+    }
+    .nav-tile-desc {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 15px; color: var(--muted);
+      font-style: italic; line-height: 1.5; flex:1;
+    }
+    .nav-tile-arrow {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    @media (max-width:960px) {
+      #hero { padding: 100px 24px 60px; }
+      .nav-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width:480px) {
+      .nav-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Aller au contenu principal</a>
+
+<nav>
+  <a href="index.html" class="nav-logo">Jordan <em>Culot</em></a>
+  <div class="nav-links" id="navLinks">
+    <a href="pages/projets.html"    class="nav-link">Projets</a>
+    <a href="pages/dessins.html"    class="nav-link">Dessins</a>
+    <a href="pages/photos.html"     class="nav-link">Photos</a>
+    <a href="pages/videos.html"     class="nav-link">Vidéos</a>
+    <a href="pages/animations.html" class="nav-link">Animations</a>
+    <a href="pages/apropos.html"    class="nav-link">À propos</a>
+    <a href="pages/contact.html"    class="nav-link">Contact</a>
+  </div>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<main id="main-content">
+  <section id="hero">
+    <div class="hero-eyebrow">Étudiant BUT MMI  IUT de Troyes</div>
+    <h1 class="hero-name">
+      <span class="outline">Jordan</span><br>
+      <span class="italic">Culot</span>
+    </h1>
+    <p class="hero-tagline">
+      Illustration, design web,<br>
+      photographie &amp; production vidéo.
+    </p>
+    <div class="hero-ctas">
+      <a href="pages/projets.html" class="btn-gold">Voir mes projets</a>
+      <a href="pages/apropos.html" class="btn-outline">À propos</a>
+    </div>
+  </section>
+</main>
+
+<div class="nav-grid">
+  <a href="pages/projets.html" class="nav-tile reveal">
+    <div class="nav-tile-num">01</div>
+    <div class="nav-tile-title">Projets</div>
+    <div class="nav-tile-desc">SAÉ, web, audiovisuel, design.</div>
+    <div class="nav-tile-arrow">Voir →</div>
+  </a>
+  <a href="pages/photos.html" class="nav-tile reveal">
+    <div class="nav-tile-num">02</div>
+    <div class="nav-tile-title">Photos</div>
+    <div class="nav-tile-desc">Voyages et paysages nordiques.</div>
+    <div class="nav-tile-arrow">Voir →</div>
+  </a>
+  <a href="pages/videos.html" class="nav-tile reveal">
+    <div class="nav-tile-num">03</div>
+    <div class="nav-tile-title">Vidéos</div>
+    <div class="nav-tile-desc">Montages et spots.</div>
+    <div class="nav-tile-arrow">Voir →</div>
+  </a>
+  <a href="pages/animations.html" class="nav-tile reveal">
+    <div class="nav-tile-num">04</div>
+    <div class="nav-tile-title">Animations</div>
+    <div class="nav-tile-desc">Motion design After Effects.</div>
+    <div class="nav-tile-arrow">Voir →</div>
+  </a>
+</div>
+
+<footer>
+  <div class="footer-brand">Jordan Culot</div>
+  <div class="footer-socials">
+    <a href="https://www.linkedin.com/in/jordan-culot-34a53b3ab" class="fsocial" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    <a href="https://github.com/" class="fsocial" target="_blank" rel="noopener noreferrer">GitHub</a>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('navToggle').addEventListener('click', function() {
+    const open = document.getElementById('navLinks').classList.toggle('open');
+    this.setAttribute('aria-expanded', open);
+  });
+  const revObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(r => revObs.observe(r));
+</script>
+</body>
+</html>

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="À propos de Jordan Culot  étudiant BUT MMI à l'IUT de Troyes, passionné d'audiovisuel, de web et de création numérique.">
+  <title>À propos  Jordan Culot</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .nav-toggle { display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:4px; }
+    .nav-toggle span { display:block; width:22px; height:1.5px; background:var(--ink); transition:all 0.3s; }
+    @media (max-width:960px) {
+      .nav-toggle { display:flex; }
+      .nav-links { display:none; position:absolute; top:100%; left:0; right:0; background:rgba(245,240,232,0.97); backdrop-filter:blur(16px); border-bottom:1px solid var(--border); flex-direction:column; padding:16px 24px; gap:0; }
+      .nav-links.open { display:flex; }
+      .nav-link { padding:14px 0; border-bottom:1px solid var(--border); }
+    }
+
+    .apropos-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .apropos-intro {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(20px, 2.5vw, 30px);
+      font-weight: 400; font-style: italic;
+      color: var(--ink); line-height: 1.5;
+      margin-bottom: 28px;
+    }
+    .apropos-body {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px; color: var(--ink2);
+      line-height: 1.85; margin-bottom: 40px;
+    }
+    .apropos-body strong { color: var(--ink); }
+
+    /* Langues */
+    .langues-label {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 16px;
+    }
+    .langues-list {
+      display: flex; flex-wrap: wrap; gap: 12px;
+      margin-bottom: 40px;
+    }
+    .langue-item {
+      display: flex; align-items: center; gap: 10px;
+      border: 1px solid var(--border);
+      padding: 10px 16px; border-radius: 2px;
+      background: #fff;
+    }
+    .langue-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 15px; color: var(--ink);
+    }
+    .langue-level {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    /* Outils */
+    .outils-label {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 16px;
+    }
+    .outils-grid {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin-bottom: 48px;
+    }
+    .outil-tag {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 7px 14px; border: 1px solid var(--border);
+      color: var(--muted); border-radius: 2px;
+      transition: all 0.2s;
+    }
+    .outil-tag:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* CV */
+    .cv-block {
+      padding: 28px 32px; border: 1px solid var(--border);
+      border-radius: 4px; background: #fff;
+    }
+    .cv-label {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 10px;
+    }
+    .cv-desc {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px; font-style: italic; color: var(--muted);
+      margin-bottom: 20px; line-height: 1.6;
+    }
+
+    /* Parcours */
+    .parcours-label {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 32px;
+    }
+    .parcours-item {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 20px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 28px;
+    }
+    .parcours-item:last-child { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
+    .parcours-year {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 10px; letter-spacing: 1px; color: var(--gold); padding-top: 3px;
+    }
+    .parcours-nom {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px; font-weight: 700; color: var(--ink); margin-bottom: 4px;
+    }
+    .parcours-lieu {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 15px; font-style: italic; color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .parcours-detail {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14px; color: var(--muted); line-height: 1.5;
+    }
+
+    /* Centres d'intérêt */
+    .interests-label {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 16px; margin-top: 40px;
+    }
+    .interests-grid {
+      display: flex; flex-wrap: wrap; gap: 8px;
+    }
+    .interest-tag {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 15px; font-style: italic;
+      padding: 6px 14px; border: 1px solid var(--border);
+      color: var(--ink2); border-radius: 2px;
+    }
+
+    @media (max-width:960px) {
+      .apropos-layout { grid-template-columns: 1fr; gap: 48px; }
+    }
+  </style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Aller au contenu principal</a>
+<nav>
+  <a href="../index.html" class="nav-logo">Jordan <em>Culot</em></a>
+  <div class="nav-links" id="navLinks">
+    <a href="projets.html"    class="nav-link">Projets</a>
+    <a href="dessins.html"    class="nav-link">Dessins</a>
+    <a href="photos.html"     class="nav-link">Photos</a>
+    <a href="videos.html"     class="nav-link">Vidéos</a>
+    <a href="animations.html" class="nav-link">Animations</a>
+    <a href="apropos.html"    class="nav-link active">À propos</a>
+    <a href="contact.html"    class="nav-link">Contact</a>
+  </div>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<main id="main-content">
+<section style="padding-top:140px;">
+  <div class="section-header reveal">
+    <h2 class="section-title">À <em>propos</em></h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="apropos-layout">
+
+    <!-- Colonne gauche -->
+    <div>
+      <p class="apropos-intro reveal">
+        Passionné par la création numérique sous toutes ses formes.
+      </p>
+      <p class="apropos-body reveal">
+        Étudiant en <strong>BUT Métiers du Multimédia et de l'Internet</strong> à l'IUT de Troyes, je me forme au <strong>développement web</strong>, à la <strong>production audiovisuelle</strong> et à la <strong>communication digitale</strong>.<br><br>
+        Curieux et autonome, je développe mes compétences aussi bien à travers les SAÉ universitaires que par des projets personnels : illustrations numériques, création de contenus, montage vidéo.<br><br>
+        Titulaire du permis B, je suis disponible pour <strong>  une alternance</strong> dans les domaines du web, de l'audiovisuel ou de la communication numérique.
+      </p>
+
+      <!-- Langues -->
+      <div class="reveal">
+        <div class="langues-label">Langues</div>
+        <div class="langues-list">
+          <div class="langue-item">
+            <span class="langue-name">Français</span>
+            <span class="langue-level">Natif</span>
+          </div>
+          <div class="langue-item">
+            <span class="langue-name">Anglais</span>
+            <span class="langue-level">C1</span>
+          </div>
+          <div class="langue-item">
+            <span class="langue-name">Espagnol</span>
+            <span class="langue-level">B1</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Outils -->
+      <div class="reveal">
+        <div class="outils-label">Compétences & outils</div>
+        <div class="outils-grid">
+          <span class="outil-tag">HTML / CSS</span>
+          <span class="outil-tag">JavaScript</span>
+          <span class="outil-tag">PHP</span>
+          <span class="outil-tag">MySQL</span>
+          <span class="outil-tag">JSON</span>
+          <span class="outil-tag">Docker</span>
+          <span class="outil-tag">Photoshop</span>
+          <span class="outil-tag">Illustrator</span>
+          <span class="outil-tag">After Effects</span>
+          <span class="outil-tag">Premiere Pro</span>
+          <span class="outil-tag">Suite Office 365</span>
+          <span class="outil-tag">Figma</span>
+          <span class="outil-tag">SEO / SEA</span>
+        </div>
+      </div>
+
+      <!-- CV -->
+      <div class="cv-block reveal">
+        <div class="cv-label">Curriculum Vitæ</div>
+        <p class="cv-desc">Mon parcours complet, mes compétences et mes expériences disponibles en téléchargement.</p>
+        <a href="../jordan_culot_cv.pdf" download class="btn-gold">Télécharger le CV</a>
+      </div>
+
+      <!-- Centres d'intérêt -->
+      <div class="reveal">
+        <div class="interests-label">Centres d'intérêt</div>
+        <div class="interests-grid">
+          <span class="interest-tag">Audiovisuel</span>
+          <span class="interest-tag">Football</span>
+          <span class="interest-tag">Réseaux sociaux</span>
+          <span class="interest-tag">Graphisme</span>
+          <span class="interest-tag">Streaming</span>
+          <span class="interest-tag">Culture numérique</span>
+          <span class="interest-tag">Jeux vidéo</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Colonne droite : parcours -->
+    <div>
+      <div class="parcours-label reveal">Parcours</div>
+
+      <div class="parcours-item reveal">
+        <div class="parcours-year">2025<br>aujourd'hui</div>
+        <div>
+          <div class="parcours-nom">BUT Métiers du Multimédia et de l'Internet</div>
+          <div class="parcours-lieu">IUT de Troyes URCA</div>
+          <div class="parcours-detail">
+            Formation pluridisciplinaire alliant développement web, communication digitale, production audiovisuelle et design. Réalisation de SAÉ (Situations d'Apprentissage et d'Évaluation) en conditions réelles.
+          </div>
+        </div>
+      </div>
+
+    
+
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="footer-brand">Jordan Culot</div>
+  <div class="footer-socials">
+    <a href="https://www.linkedin.com/in/jordan-culot-34a53b3ab" class="fsocial" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    <a href="https://github.com/" class="fsocial" target="_blank" rel="noopener noreferrer">GitHub</a>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('navToggle').addEventListener('click', function() {
+    const open = document.getElementById('navLinks').classList.toggle('open');
+    this.setAttribute('aria-expanded', open);
+  });
+  const revObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(r => revObs.observe(r));
+</script>
+</body>
+</html>

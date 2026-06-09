@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="La Gimsothèque  projet web SAÉ 105, Jordan Culot.">
+  <title>La Gimsothèque  Jordan Culot</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+    .nav-toggle span{display:block;width:22px;height:1.5px;background:var(--ink);transition:all 0.3s}
+    @media(max-width:960px){
+      .nav-toggle{display:flex}
+      .nav-links{display:none;position:absolute;top:100%;left:0;right:0;background:rgba(245,240,232,0.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);flex-direction:column;padding:16px 24px;gap:0}
+      .nav-links.open{display:flex}
+      .nav-link{padding:14px 0;border-bottom:1px solid var(--border)}
+    }
+
+    .projet-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    /* Mockup du site dans un browser */
+    .browser-frame {
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 24px 60px var(--shadow);
+    }
+    .browser-bar {
+      background: var(--cream2);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+    .browser-dots { display:flex; gap:6px; }
+    .browser-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+    }
+    .browser-dot:nth-child(1) { background: #ff5f57; }
+    .browser-dot:nth-child(2) { background: #febc2e; }
+    .browser-dot:nth-child(3) { background: #28c840; }
+    .browser-url {
+      flex: 1;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 4px 10px;
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 10px; color: var(--muted);
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .browser-content {
+      aspect-ratio: 16/10;
+      overflow: hidden;
+      background: #0a0a12;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .browser-content img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    /* Lien live */
+    .projet-live-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 16px;
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+      color: #fff;
+      text-decoration: none;
+      background: var(--gold);
+      border: 1px solid var(--gold);
+      padding: 13px 22px;
+      border-radius: 2px;
+      transition: all 0.25s;
+      font-weight: 600;
+    }
+    .projet-live-link:hover {
+      background: transparent;
+      color: var(--gold);
+    }
+    .live-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: #28c840;
+      flex-shrink: 0;
+      box-shadow: 0 0 6px #28c840;
+    }
+
+    .projet-back {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--gold); text-decoration: none;
+      margin-bottom: 40px;
+      transition: gap 0.2s;
+    }
+    .projet-back:hover { gap: 14px; }
+
+    .projet-meta-row {
+      display: flex; flex-wrap: wrap; gap: 28px;
+      margin-bottom: 32px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--border);
+    }
+    .projet-meta-label {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 5px;
+    }
+    .projet-meta-val {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 15px; color: var(--ink2);
+    }
+
+    .projet-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(30px, 4vw, 50px);
+      font-weight: 700; line-height: 1.1;
+      color: var(--ink);
+      margin-bottom: 20px;
+    }
+    .projet-title em { color: var(--gold); font-style: italic; }
+
+    .projet-desc {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px; color: var(--ink2);
+      line-height: 1.85;
+      margin-bottom: 32px;
+    }
+
+    /* Fonctionnalités */
+    .features-label {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 14px;
+    }
+    .features-list {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 10px;
+      margin-bottom: 32px;
+    }
+    .features-list li {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px; color: var(--ink2);
+      display: flex; align-items: baseline; gap: 10px;
+    }
+    .features-list li::before {
+      content: '';
+      color: var(--gold);
+      flex-shrink: 0;
+      font-size: 12px;
+    }
+
+    /* Outils */
+    .projet-tools-label {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 12px;
+    }
+    .projet-tools {
+      display: flex; flex-wrap: wrap; gap: 8px;
+    }
+    .projet-tool {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 6px 14px; border: 1px solid var(--border);
+      color: var(--muted); border-radius: 2px;
+    }
+
+    @media(max-width:860px) { .projet-layout { grid-template-columns: 1fr; gap: 40px; } }
+  </style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Aller au contenu principal</a>
+<nav>
+  <a href="../index.html" class="nav-logo">Jordan <em>Culot</em></a>
+  <div class="nav-links" id="navLinks">
+    <a href="projets.html"    class="nav-link active">Projets</a>
+    <a href="dessins.html"    class="nav-link">Dessins</a>
+    <a href="photos.html"     class="nav-link">Photos</a>
+    <a href="videos.html"     class="nav-link">Vidéos</a>
+    <a href="animations.html" class="nav-link">Animations</a>
+    <a href="apropos.html"    class="nav-link">À propos</a>
+    <a href="contact.html"    class="nav-link">Contact</a>
+  </div>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<main id="main-content">
+<section style="padding-top:140px;">
+  <a href="projets.html" class="projet-back reveal">← Retour aux projets</a>
+
+  <div class="projet-layout">
+
+    <!-- Visuel gauche -->
+    <div class="reveal">
+      <div class="browser-frame">
+        <div class="browser-bar">
+          <div class="browser-dots">
+            <div class="browser-dot"></div>
+            <div class="browser-dot"></div>
+            <div class="browser-dot"></div>
+          </div>
+          <div class="browser-url">sae105.mmi25g03.mmi-troyes.fr/index.php</div>
+        </div>
+        <a href="http://sae105.mmi25g03.mmi-troyes.fr/index.php" target="_blank" rel="noopener noreferrer" style="display:block;position:relative;" title="Voir le site en ligne">
+          <div class="browser-content">
+            <img src="../images/gims_preview.png" alt="Aperçu du site La Gimsothèque">
+          </div>
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(42,31,15,0);transition:background 0.3s;" onmouseover="this.style.background='rgba(42,31,15,0.45)';this.querySelector('span').style.opacity='1'" onmouseout="this.style.background='rgba(42,31,15,0)';this.querySelector('span').style.opacity='0'">
+            <span style="font-family:'Josefin Sans',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#fff;border:1px solid rgba(255,255,255,0.8);padding:10px 22px;border-radius:2px;background:rgba(184,151,58,0.5);backdrop-filter:blur(4px);opacity:0;transition:opacity 0.3s;">Visiter le site →</span>
+          </div>
+        </a>
+      </div>
+      <a href="http://sae105.mmi25g03.mmi-troyes.fr/index.php" target="_blank" rel="noopener noreferrer" class="projet-live-link">
+        <span class="live-dot"></span>
+        Voir le site en ligne →
+      </a>
+    </div>
+
+    <!-- Infos droite -->
+    <div class="reveal">
+      <div class="projet-meta-row">
+        <div>
+          <div class="projet-meta-label">Catégorie</div>
+          <div class="projet-meta-val">Développement web</div>
+        </div>
+        <div>
+          <div class="projet-meta-label">Contexte</div>
+          <div class="projet-meta-val">SAÉ 105  BUT MMI</div>
+        </div>
+      </div>
+
+      <h1 class="projet-title">La <em>Gimsothèque</em></h1>
+
+      <p class="projet-desc">
+        Dans le cadre de la SAÉ 105 de première année de BUT MMI, il m'a été demandé de concevoir un site web entièrement dédié à un artiste de mon choix. J'ai choisi <strong>Maître Gims</strong>, artiste incontournable de la scène urbaine française.<br><br>
+        Ce projet m'a permis de mettre en pratique mes compétences en <strong>HTML, CSS et PHP</strong>, avec une gestion des données musicales en <strong>JSON</strong>  discographie complète, galerie d'albums, intégration Spotify et formulaire de contact.
+      </p>
+
+      <div class="features-label">Fonctionnalités développées</div>
+      <ul class="features-list">
+        <li>Page d'accueil avec intégration de players Spotify embarqués</li>
+        <li>Base de données discographique complète en JSON (60+ titres)</li>
+        <li>Galerie interactive avec upload d'images côté utilisateur</li>
+        <li>Formulaire de contact fonctionnel</li>
+        <li>Page partenaires et page crédits</li>
+        <li>Site responsive, compatible mobile</li>
+      </ul>
+
+      <div class="projet-tools-label">Technologies utilisées</div>
+      <div class="projet-tools">
+        <span class="projet-tool">HTML5</span>
+        <span class="projet-tool">CSS3</span>
+        <span class="projet-tool">PHP</span>
+        <span class="projet-tool">JSON</span>
+        <span class="projet-tool">JavaScript</span>
+        <span class="projet-tool">API Spotify</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="footer-brand">Jordan Culot</div>
+  <div class="footer-socials">
+    <a href="https://www.linkedin.com/in/jordan-culot-34a53b3ab" class="fsocial" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    <a href="https://github.com/" class="fsocial" target="_blank" rel="noopener noreferrer">GitHub</a>
+  </div>
+</footer>
+<script>
+  document.getElementById('navToggle').addEventListener('click', function() {
+    const open = document.getElementById('navLinks').classList.toggle('open');
+    this.setAttribute('aria-expanded', open);
+  });
+  const revObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+  }, { threshold: 0.05 });
+  document.querySelectorAll('.reveal').forEach(r => revObs.observe(r));
+</script>
+</body>
+</html>
