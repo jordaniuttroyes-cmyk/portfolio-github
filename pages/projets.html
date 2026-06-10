@@ -377,6 +377,15 @@
       document.getElementById('projPlaceholder').style.display = visible === 0 ? '' : 'none';
     });
   });
+  document.querySelectorAll('.proj-card-img img').forEach(img => {
+  img.addEventListener('error', function() {
+    if (this.src.includes('maxresdefault')) {
+      this.src = this.src.replace('maxresdefault', 'hqdefault');
+    } else if (this.src.includes('hqdefault')) {
+      this.src = this.src.replace('hqdefault', 'mqdefault');
+    }
+  });
+});
 </script>
 </body>
 </html>
