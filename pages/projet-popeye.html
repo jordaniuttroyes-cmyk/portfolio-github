@@ -55,7 +55,7 @@
       cursor:pointer; transition:border-color 0.2s, box-shadow 0.2s;
     }
     .img-thumb:hover { border-color:var(--gold); box-shadow:0 8px 24px var(--shadow); }
-    .img-thumb img { width:100%; display:block; object-fit:cover; aspect-ratio:4/3; }
+    .img-thumb img { width:100%; display:block; object-fit:contain; aspect-ratio:3/4; background:#f5f0e8; }
 
     /* Infos droite */
     .projet-meta-row {
@@ -176,7 +176,8 @@
     }
     .livrable-card img {
       width:100%; display:block;
-      object-fit:cover;
+      object-fit:contain;
+      background:#f5f0e8;
     }
     .livrable-body {
       padding:20px 22px;
