@@ -151,7 +151,7 @@
     }
     .vmodal-close:hover { color: var(--gold); border-color: var(--gold); }
     .vmodal-player { position: relative; padding-bottom: 56.25%; background: #000; }
-    .vmodal-player iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+    .vmodal-player video { position: absolute; inset: 0; width: 100%; height: 100%; }
 
     @media (max-width:768px) { .anim-grid { grid-template-columns: 1fr; } }
   </style>
@@ -239,14 +239,14 @@
   document.querySelectorAll('.reveal').forEach(r => revObs.observe(r));
 
   const animData = {
-    pepsi: { title: 'Pepsi', youtubeId: 'rPnf3pmz3gw' }
+    pepsi: { title: 'Pepsi', src: '../animations/pepsi.mp4' }
   };
 
   function openVid(key) {
     const v = animData[key];
     const player = document.getElementById('vmodalPlayer');
     document.getElementById('vmodalTitle').textContent = v.title;
-    player.innerHTML = `<iframe src="https://www.youtube.com/embed/${v.youtubeId}?autoplay=1&rel=0&modestbranding=1" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>`;
+    player.innerHTML = `<video src="${v.src}" controls autoplay style="position:absolute;inset:0;width:100%;height:100%;"></video>`;
     document.getElementById('vmodal').classList.add('open');
     document.body.style.overflow = 'hidden';
   }
