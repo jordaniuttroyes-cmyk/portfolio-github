@@ -188,13 +188,11 @@
     <form class="cform reveal" id="my-form">
       <div class="field">
         <label class="flabel" for="f-nom">Nom</label>
-        <input type="text" class="finput" id="f-nom" name="nom" data-fs-field placeholder="Votre nom" autocomplete="name">
-        <span data-fs-error="nom" class="fs-error-msg"></span>
+        <input type="text" class="finput" id="f-nom" name="nom" placeholder="Votre nom" autocomplete="name" required>
       </div>
       <div class="field">
         <label class="flabel" for="f-email">Email</label>
-        <input type="email" class="finput" id="f-email" name="email" data-fs-field placeholder="votre@email.com" autocomplete="email">
-        <span data-fs-error="email" class="fs-error-msg"></span>
+        <input type="email" class="finput" id="f-email" name="email" placeholder="votre@email.com" autocomplete="email" required>
       </div>
       <div class="field">
         <label class="flabel" for="f-sujet">Sujet</label>
@@ -202,12 +200,11 @@
       </div>
       <div class="field">
         <label class="flabel" for="f-msg">Message</label>
-        <textarea class="ftextarea" id="f-msg" name="message" data-fs-field placeholder="Décrivez votre projet ou opportunité…"></textarea>
-        <span data-fs-error="message" class="fs-error-msg"></span>
+        <textarea class="ftextarea" id="f-msg" name="message" placeholder="Décrivez votre projet ou opportunité…" required></textarea>
       </div>
-      <div data-fs-error class="fs-error-msg"></div>
-      <div data-fs-success class="fs-success-msg"></div>
-      <button class="fsend" data-fs-submit-btn>Envoyer →</button>
+      <div class="fs-error-msg" id="form-error"></div>
+      <div class="fs-success-msg" id="form-success"></div>
+      <button class="fsend" id="form-btn" type="submit">Envoyer →</button>
     </form>
 
   </div>
@@ -232,16 +229,44 @@
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(r => revObs.observe(r));
 
-  window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
-  formspree('initForm', {
-    formElement: '#my-form',
-    formId: 'xaqzbblp',
-    messages: {
-      success: 'Message envoyé ✓ Je vous réponds sous 48h.',
-      error: 'Une erreur est survenue, réessayez.'
+  const form       = document.getElementById('my-form');
+  const btn        = document.getElementById('form-btn');
+  const successMsg = document.getElementById('form-success');
+  const errorMsg   = document.getElementById('form-error');
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    btn.disabled = true;
+    btn.textContent = 'Envoi…';
+    successMsg.textContent = '';
+    errorMsg.textContent = '';
+
+    try {
+      const res = await fetch('https://formspree.io/f/xaqzbblp', {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (res.ok) {
+        successMsg.textContent = 'Message envoyé ✓ Je vous réponds sous 48h.';
+        form.reset();
+        btn.textContent = 'Envoyé ✓';
+        btn.style.background = '#2a7a2a';
+        setTimeout(() => {
+          btn.textContent = 'Envoyer →';
+          btn.style.background = '';
+          btn.disabled = false;
+        }, 4000);
+      } else {
+        throw new Error();
+      }
+    } catch {
+      errorMsg.textContent = 'Une erreur est survenue, réessayez.';
+      btn.textContent = 'Envoyer →';
+      btn.disabled = false;
     }
   });
 </script>
-<script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 </body>
 </html>
