@@ -13,7 +13,7 @@
       .nav-toggle { display:flex; }
       .nav-links { display:none; position:absolute; top:100%; left:0; right:0; background:rgba(245,240,232,0.97); backdrop-filter:blur(16px); border-bottom:1px solid var(--border); flex-direction:column; padding:16px 24px; gap:0; }
       .nav-links.open { display:flex; }
-      .nav-link { padding:14px 0; border-bottom:1px solid var(--border); }
+      .nav-link { padding:14px 0; border-bottom:1px solid var(--border)}
     }
 
     .videos-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:28px; }
@@ -94,19 +94,19 @@
       </div>
     </div>
 
-    <div class="v-card reveal" onclick="openVid('animatique')">
+    <div class="v-card reveal" onclick="openVid('insomnia')">
       <div class="v-thumb">
-        <div class="v-yt-thumb" style="background-image:url('https://img.youtube.com/vi/bwS6VewKdSg/hqdefault.jpg');"');"></div>
+        <div class="v-yt-thumb" style="background-image:url('https://img.youtube.com/vi/z2GuNxogHw4/maxresdefault.jpg');"></div>
         <div class="v-gradient"></div>
         <div class="v-play"><div class="v-circle"><div class="v-tri"></div></div></div>
-        <div class="v-tag-type">Animatique</div>
+        <div class="v-tag-type">Spot Pub</div>
       </div>
       <div class="v-body">
-        <div class="v-title">Animatique  Escape Game Nocturne</div>
-        <div class="v-desc">Présentation animée d'un projet d'escape game nocturne  storyboard illustré, narration visuelle et montage rythmé en ~40 secondes.</div>
-        <div class="v-meta"><span>Premiere Pro</span><span>Illustrator</span><span>SAÉ Finale</span></div>
+        <div class="v-title">Spot Pub - Projet Insomnia</div>
+        <div class="v-desc">Vidéo finale promotionnelle pour l'escape game nocturne Insomnia. Projet d'équipe pluridisciplinaire.</div>
+        <div class="v-meta"><span>Premiere Pro</span><span>After Effects</span><span>SAÉ Finale</span></div>
         <div style="margin-top:14px; position:relative; z-index:2;">
-          <a href="projet-animatique.html" style="
+          <a href="projet-insomnia.html" style="
             font-family:'Josefin Sans',sans-serif; font-size:9px; letter-spacing:2px; text-transform:uppercase;
             color:var(--gold); text-decoration:none; border-bottom:1px solid var(--gold);
             padding-bottom:2px; transition:opacity 0.2s;
@@ -162,9 +162,9 @@
   document.querySelectorAll('.reveal').forEach(r => revObs.observe(r));
 
   const vids = {
-    animatique: { title: 'Animatique  Escape Game Nocturne', youtubeId: 'bwS6VewKdSg' },
-    valo:  { title: 'Montage Valorant',       youtubeId: 'fIRQRpvKx4s' },
-    pepsi: { title: 'Spot Publicitaire  Pepsi', youtubeId: 'rPnf3pmz3gw' }
+    insomnia:   { title: 'Spot Publicitaire - Projet Insomnia', youtubeId: 'z2GuNxogHw4' },
+    valo:       { title: 'Montage Valorant',                    youtubeId: 'fIRQRpvKx4s' },
+    pepsi:      { title: 'Spot Publicitaire  Pepsi',            youtubeId: 'rPnf3pmz3gw' }
   };
 
   function openVid(key) {
