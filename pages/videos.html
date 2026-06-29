@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Productions vidéo de Jordan Culot  montages et spots.">
-  <title>Vidéos  Jordan Culot</title>
+  <meta name="description" content="Productions vidéo de Jordan Culot — Réalisations, montages et spots publicitaires.">
+  <title>Vidéos — Jordan Culot</title>
   <link rel="stylesheet" href="../style.css">
   <style>
     .nav-toggle { display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:4px; }
@@ -18,38 +18,9 @@
 
     .videos-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:28px; }
 
-    .v-card { background:#fff; border:1px solid var(--border); border-radius:4px; overflow:hidden; cursor:pointer; transition:transform 0.35s, box-shadow 0.35s, border-color 0.35s; box-shadow:0 2px 12px var(--shadow); }
-    .v-card:hover { transform:translateY(-6px); box-shadow:0 20px 48px var(--shadow); border-color:var(--gold); }
-
-    .v-thumb { position:relative; padding-bottom:56.25%; overflow:hidden; background:var(--ink); }
-    .v-yt-thumb { position:absolute; inset:0; background-size:cover; background-position:center; transition:transform 0.5s, filter 0.3s; }
-    .v-card:hover .v-yt-thumb { transform:scale(1.04); filter:brightness(0.7); }
-    .v-gradient { position:absolute; inset:0; background:linear-gradient(to top,rgba(42,31,15,.55) 0%,transparent 55%); }
-
-    .v-play { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; z-index:2; }
-    .v-circle { width:60px; height:60px; border-radius:50%; background:var(--gold); display:flex; align-items:center; justify-content:center; transition:background 0.3s, transform 0.2s; box-shadow:0 6px 24px rgba(0,0,0,.3); }
-    .v-card:hover .v-circle { background:var(--brown); transform:scale(1.08); }
-    .v-tri { width:0; height:0; border-top:9px solid transparent; border-bottom:9px solid transparent; border-left:16px solid #fff; margin-left:4px; }
-
-    .v-tag-type { position:absolute; bottom:12px; left:12px; font-family:'Josefin Sans',sans-serif; font-size:9px; letter-spacing:2px; text-transform:uppercase; background:var(--gold); color:var(--cream); padding:4px 10px; border-radius:2px; z-index:2; }
-
-    .v-body { padding:20px 22px 24px; }
-    .v-title { font-family:'Playfair Display',serif; font-size:19px; font-weight:700; color:var(--ink); margin-bottom:6px; letter-spacing:-0.3px; }
-    .v-desc { font-family:'Cormorant Garamond',serif; font-size:15px; color:var(--muted); font-style:italic; line-height:1.65; margin-bottom:12px; }
-    .v-meta { font-family:'Josefin Sans',sans-serif; font-size:10px; color:var(--muted); letter-spacing:1.5px; text-transform:uppercase; display:flex; gap:0; }
-    .v-meta span + span::before { content:''; display:inline-block; width:3px; height:3px; background:var(--gold); border-radius:50%; margin:0 10px; vertical-align:middle; }
-
-    .vmodal { display:none; position:fixed; inset:0; background:rgba(10,7,3,.92); z-index:200; align-items:center; justify-content:center; padding:20px; }
-    .vmodal.open { display:flex; }
-    .vmodal-box { width:min(90vw,960px); background:var(--ink); border:1px solid rgba(184,151,58,.2); border-radius:4px; overflow:hidden; box-shadow:0 40px 100px rgba(0,0,0,.6); }
-    .vmodal-header { display:flex; align-items:center; justify-content:space-between; padding:16px 20px; border-bottom:1px solid rgba(184,151,58,.15); }
-    .vmodal-title { font-family:'Playfair Display',serif; font-size:16px; font-style:italic; color:var(--cream); }
-    .vmodal-close { font-family:'Josefin Sans',sans-serif; font-size:10px; letter-spacing:2px; text-transform:uppercase; background:transparent; color:var(--muted); border:1px solid rgba(255,255,255,.15); padding:8px 16px; cursor:pointer; border-radius:2px; transition:all 0.2s; }
-    .vmodal-close:hover { color:var(--gold); border-color:var(--gold); }
-    .vmodal-player { position:relative; padding-bottom:56.25%; background:#000; }
-    .vmodal-player iframe { position:absolute; inset:0; width:100%; height:100%; border:none; }
-
-    @media (max-width:768px) { .videos-grid { grid-template-columns:1fr; } }
+    @media (max-width:760px) {
+      .videos-grid { grid-template-columns:1fr; }
+    }
   </style>
 </head>
 <body>
@@ -72,85 +43,13 @@
 </nav>
 
 <main id="main-content">
-<section id="videos" style="padding-top:140px;">
-  <div class="section-header reveal">
-    <h2 class="section-title">Pro<em>duction</em> Vidéo</h2>
-    <div class="section-rule"></div>
-  </div>
+<section style="padding-top:140px; min-height:80vh;">
+  <div class="section-eyebrow reveal">Réalisations</div>
+  <h1 class="section-title reveal">Production <em>Audiovisuelle</em></h1>
 
   <div class="videos-grid">
 
-    <div class="v-card reveal" onclick="openVid('animatique')">
-      <div class="v-thumb">
-        <div class="v-yt-thumb" style="background-image:url('https://img.youtube.com/vi/bwS6VewKdSg/maxresdefault.jpg');"></div>
-        <div class="v-gradient"></div>
-        <div class="v-play"><div class="v-circle"><div class="v-tri"></div></div></div>
-        <div class="v-tag-type">Storyboard / Pré-prod</div>
-      </div>
-      <div class="v-body">
-        <div class="v-title">Animatique - Projet Insomnia [Avant]</div>
-        <div class="v-desc">Storyboard animé et intentions de réalisation originaux pour l'escape game nocturne Insomnia.</div>
-        <div class="v-meta"><span>Premiere Pro</span><span>Storyboard</span></div>
-        <div style="margin-top:14px; position:relative; z-index:2;">
-          <a href="projet-insomnia.html" style="
-            font-family:'Josefin Sans',sans-serif; font-size:9px; letter-spacing:2px; text-transform:uppercase;
-            color:var(--gold); text-decoration:none; border-bottom:1px solid var(--gold);
-            padding-bottom:2px; transition:opacity 0.2s;
-          ">Voir l'étude de cas →</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="v-card reveal" onclick="openVid('insomnia')">
-      <div class="v-thumb">
-        <div class="v-yt-thumb" style="background-image:url('https://img.youtube.com/vi/z2GuNxogHw4/maxresdefault.jpg');"></div>
-        <div class="v-gradient"></div>
-        <div class="v-play"><div class="v-circle"><div class="v-tri"></div></div></div>
-        <div class="v-tag-type">Spot Pub Final</div>
-      </div>
-      <div class="v-body">
-        <div class="v-title">Spot Publicitaire - Projet Insomnia [Après]</div>
-        <div class="v-desc">Vidéo promotionnelle finale réalisée pour l'escape game. Rendu immersif avec direction artistique complète.</div>
-        <div class="v-meta"><span>Premiere Pro</span><span>After Effects</span><span>SAÉ Finale</span></div>
-        <div style="margin-top:14px; position:relative; z-index:2;">
-          <a href="projet-insomnia.html" style="
-            font-family:'Josefin Sans',sans-serif; font-size:9px; letter-spacing:2px; text-transform:uppercase;
-            color:var(--gold); text-decoration:none; border-bottom:1px solid var(--gold);
-            padding-bottom:2px; transition:opacity 0.2s;
-          ">Voir l'étude de cas →</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="v-card reveal" onclick="openVid('valo')">
-      <div class="v-thumb">
-        <div class="v-yt-thumb" style="background-image:url('https://img.youtube.com/vi/fIRQRpvKx4s/maxresdefault.jpg');"></div>
-        <div class="v-gradient"></div>
-        <div class="v-play"><div class="v-circle"><div class="v-tri"></div></div></div>
-        <div class="v-tag-type">Montage</div>
-      </div>
-      <div class="v-body">
-        <div class="v-title">Montage Valorant</div>
-        <div class="v-desc">Montage Valorant. Synchronisation musicale et effets de transition travaillés.</div>
-        <div class="v-meta"><span>Premiere Pro</span><span>Montage</span></div>
-      </div>
-    </div>
-
-    <div class="v-card reveal" onclick="openVid('pepsi')">
-      <div class="v-thumb">
-        <div class="v-yt-thumb" style="background-image:url('https://img.youtube.com/vi/rPnf3pmz3gw/maxresdefault.jpg');"></div>
-        <div class="v-gradient"></div>
-        <div class="v-play"><div class="v-circle"><div class="v-tri"></div></div></div>
-        <div class="v-tag-type">Montage</div>
-      </div>
-      <div class="v-body">
-        <div class="v-title">Montage série Supernatural</div>
-        <div class="v-desc">Montage personnel sur la série Supernatural.</div>
-        <div class="v-meta"><span>Premiere Pro</span><span>Montage</span></div>
-      </div>
-    </div>*
-    
-<div class="v-card reveal" onclick="openVid('monet')">
+    <div class="v-card reveal" onclick="openVid('monet')">
       <div class="v-thumb">
         <div class="v-yt-thumb" style="background-image:url('https://img.youtube.com/vi/e1MHH5uJZm4/maxresdefault.jpg');"></div>
         <div class="v-gradient"></div>
@@ -162,7 +61,7 @@
         <div class="v-desc">Vidéo storytelling immersive simulant l'écosystème numérique contemporain du maître impressionniste.</div>
         <div class="v-meta"><span>Premiere Pro</span><span>Stratégie</span></div>
         <div style="margin-top:14px; position:relative; z-index:2;">
-          <a href="projet-monet.html" style="
+          <a href="projet-monet.html" onclick="event.stopPropagation();" style="
             font-family:'Josefin Sans',sans-serif; font-size:9px; letter-spacing:2px; text-transform:uppercase;
             color:var(--gold); text-decoration:none; border-bottom:1px solid var(--gold);
             padding-bottom:2px; transition:opacity 0.2s;
@@ -170,17 +69,65 @@
         </div>
       </div>
     </div>
+
+    <div class="v-card reveal" onclick="openVid('insomnia')">
+      <div class="v-thumb">
+        <div class="v-yt-thumb" style="background-image:url('https://img.youtube.com/vi/z2GuNxogHw4/maxresdefault.jpg');"></div>
+        <div class="v-gradient"></div>
+        <div class="v-play"><div class="v-circle"><div class="v-tri"></div></div></div>
+        <div class="v-tag-type">Spot Publicitaire / SAÉ</div>
+      </div>
+      <div class="v-body">
+        <div class="v-title">Projet Insomnia — Escape Game</div>
+        <div class="v-desc">Spot publicitaire officiel pour un escape game urbain nocturne. Découvrez l'animatique et le rendu final.</div>
+        <div class="v-meta"><span>Premiere Pro</span><span>After Effects</span></div>
+        <div style="margin-top:14px; position:relative; z-index:2;">
+          <a href="projet-insomnia.html" onclick="event.stopPropagation();" style="
+            font-family:'Josefin Sans',sans-serif; font-size:9px; letter-spacing:2px; text-transform:uppercase;
+            color:var(--gold); text-decoration:none; border-bottom:1px solid var(--gold);
+            padding-bottom:2px; transition:opacity 0.2s;
+          ">Voir la page projet →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="v-card reveal" onclick="openVid('valo')">
+      <div class="v-thumb">
+        <div class="v-yt-thumb" style="background-image:url('https://img.youtube.com/vi/fIRQRpvKx4s/maxresdefault.jpg');"></div>
+        <div class="v-gradient"></div>
+        <div class="v-play"><div class="v-circle"><div class="v-tri"></div></div></div>
+        <div class="v-tag-type">Gaming / Rythme</div>
+      </div>
+      <div class="v-body">
+        <div class="v-title">Montage Valorant</div>
+        <div class="v-desc">Exercice de synchronisation audio-visuelle dynamique et d'effets de transition sur du gameplay compétitif.</div>
+        <div class="v-meta"><span>Premiere Pro</span><span>Dynamique</span></div>
+      </div>
+    </div>
+
+    <div class="v-card reveal" onclick="openVid('pepsi')">
+      <div class="v-thumb">
+        <div class="v-yt-thumb" style="background-image:url('https://img.youtube.com/vi/rPnf3pmz3gw');"></div>
+        <div class="v-gradient"></div>
+        <div class="v-play"><div class="v-circle"><div class="v-tri"></div></div></div>
+        <div class="v-tag-type">Montage Rythmique</div>
+      </div>
+      <div class="v-body">
+        <div class="v-title">Montage Supernatural</div>
+        <div class="v-desc">Travail de découpe et d'harmonisation de clips vidéo synchronisés sur une bande-son publicitaire.</div>
+        <div class="v-meta"><span>Premiere Pro</span><span>Sound Design</span></div>
+      </div>
+    </div>
+
   </div>
 </section>
 </main>
 
-<div class="vmodal" id="vmodal">
-  <div class="vmodal-box">
-    <div class="vmodal-header">
-      <div class="vmodal-title" id="vmodalTitle"></div>
-      <button class="vmodal-close" onclick="closeVid()">Fermer</button>
-    </div>
-    <div class="vmodal-player" id="vmodalPlayer"></div>
+<div class="v-modal" id="vmodal" onclick="closeVid()">
+  <button class="v-modal-close" onclick="closeVid()" aria-label="Fermer la vidéo">✕</button>
+  <div class="v-modal-content" onclick="event.stopPropagation()">
+    <div class="v-modal-header" id="vmodalTitle">Titre de la vidéo</div>
+    <div class="v-modal-body" id="vmodalPlayer"></div>
   </div>
 </div>
 
@@ -193,19 +140,22 @@
 </footer>
 
 <script>
+  // Menu Mobile Toggle
   document.getElementById('navToggle').addEventListener('click', function() {
     const open = document.getElementById('navLinks').classList.toggle('open');
     this.setAttribute('aria-expanded', open);
   });
+
+  // Animation d'apparition au défilement (Intersection Observer)
   const revObs = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(r => revObs.observe(r));
 
+  // Configuration de l'ensemble des ID de vidéos YouTube
   const vids = {
     monet:      { title: 'Claude Monet — Stratégie Digitale',     youtubeId: 'e1MHH5uJZm4' },
-    animatique: { title: 'Animatique - Escape Game Nocturne', youtubeId: 'bwS6VewKdSg' },
-    insomnia:   { title: 'Spot Publicitaire - Projet Insomnia', youtubeId: 'z2GuNxogHw4' },
+    insomnia:   { title: 'Projet Insomnia — Spot Publicitaire', youtubeId: 'z2GuNxogHw4' },
     valo:       { title: 'Montage Valorant',                    youtubeId: 'fIRQRpvKx4s' },
     pepsi:      { title: 'Montage Supernatural',                youtubeId: 'rPnf3pmz3gw' }
   };
@@ -219,13 +169,12 @@
     document.getElementById('vmodal').classList.add('open');
     document.body.style.overflow = 'hidden';
   }
+
   function closeVid() {
     document.getElementById('vmodalPlayer').innerHTML = '';
     document.getElementById('vmodal').classList.remove('open');
     document.body.style.overflow = '';
   }
-  document.getElementById('vmodal').addEventListener('click', function(e) { if (e.target===this) closeVid(); });
-  document.addEventListener('keydown', e => { if (e.key==='Escape') closeVid(); });
 </script>
 </body>
 </html>
