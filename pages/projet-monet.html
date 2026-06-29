@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Stratégie digitale et storytelling vidéo pour Claude Monet, projet SAÉ - Jordan Culot.">
+  <title>Claude Monet Digital Strategy - Jordan Culot</title>
+  <link rel=\"stylesheet\" href=\"../style.css\">
+  <style>
+    .nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+    .nav-toggle span{display:block;width:22px;height:1.5px;background:var(--ink);transition:all 0.3s}
+    @media(max-width:960px){
+      .nav-toggle{display:flex}
+      .nav-links{display:none;position:absolute;top:100%;left:0;right:0;background:rgba(245,240,232,0.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);flex-direction:column;padding:16px 24px;gap:0}
+      .nav-links.open{display:flex}
+      .nav-link{padding:14px 0;border-bottom:1px solid var(--border)}
+    }
+
+    .projet-layout {
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:80px;
+      padding:120px 56px 80px;
+      max-width:1440px;
+      margin:0 auto;
+    }
+    .video-container {
+      position:relative;
+      width:100%;
+      padding-bottom:56.25%;
+      height:0;
+      background:#000;
+      border:1px solid var(--border);
+    }
+    .video-container iframe {
+      position:absolute;
+      top:0; left:0; width:100%; height:100%;
+      border:none;
+    }
+    .projet-title {
+      font-family:'Playfair Display', serif;
+      font-size:clamp(36px, 5vw, 54px);
+      color:var(--ink);
+      margin-bottom:16px;
+      line-height:1.1;
+    }
+    .projet-subtitle {
+      font-family:'Josefin Sans', sans-serif;
+      font-size:11px; letter-spacing:4px; text-transform:uppercase;
+      color:var(--gold); margin-bottom:40px;
+    }
+    .projet-desc {
+      font-family:'Cormorant Garamond', serif;
+      font-size:20px; line-height:1.6;
+      color:var(--ink2); margin-bottom:32px;
+      text-align:justify;
+    }
+    .features-list {
+      margin:0 0 40px 0; padding-left:20px;
+      font-family:'Cormorant Garamond', serif;
+      font-size:19px; color:var(--ink2);
+      display:flex; flex-direction:column; gap:12px;
+    }
+    .projet-tools-label {
+      font-family:'Josefin Sans', sans-serif;
+      font-size:11px; letter-spacing:2px; text-transform:uppercase;
+      color:var(--muted); margin-bottom:16px;
+    }
+    .projet-tools { display:flex; flex-wrap:wrap; gap:12px; margin-bottom:48px; }
+    .projet-tool {
+      font-family:'Josefin Sans', sans-serif;
+      font-size:12px; letter-spacing:1px;
+      padding:8px 16px;
+      background:var(--cream2);
+      border:1px solid var(--border);
+      color:var(--ink);
+    }
+    .btn-download {
+      display:inline-block;
+      font-family:'Josefin Sans', sans-serif;
+      font-size:12px; letter-spacing:2px; text-transform:uppercase;
+      color:var(--cream); background:var(--ink);
+      padding:16px 32px; border:1px solid var(--ink);
+      text-decoration:none; transition:all 0.3s ease;
+    }
+    .btn-download:hover {
+      background:transparent; color:var(--ink);
+    }
+    @media(max-width:960px){
+      .projet-layout { grid-template-columns:1fr; gap:48px; padding:100px 24px 60px; }
+    }
+  </style>
+</head>
+<body>
+
+<a href="#content" class="skip-link">Aller au contenu</a>
+
+<header>
+  <div class="nav-container">
+    <a href="../index.html" class="logo">Jordan Culot</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+    <nav class="nav-links" id="navLinks">
+      <a href="../index.html" class="nav-link">Accueil</a>
+      <a href="illustrations.html" class="nav-link">Illustrations</a>
+      <a href="photos.html" class="nav-link">Photos</a>
+      <a href="videos.html" class="nav-link active">Vidéos</a>
+      <a href="animations.html" class="nav-link">Animations</a>
+      <a href="apropos.html" class="nav-link">À propos</a>
+    </nav>
+  </div>
+</header>
+
+<main id="content">
+  <section class="projet-layout">
+    
+    <div class="reveal">
+      <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/e1MHH5uJZm4?rel=0&modestbranding=1" 
+                allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <div class="reveal" style="transition-delay: 0.1s;">
+      <h1 class="projet-title">Claude Monet</h1>
+      <div class="projet-subtitle">Stratégie Digitale & Storytelling Vidéo (SAÉ)</div>
+      
+      <p class="projet-desc">
+        Dans le cadre de cette SAÉ, la problématique imposée consistait à imaginer l'écosystème digital complet d'un artiste illustre disparu s'il devait s'installer sur le marché de l'art contemporain actuel. Notre équipe au sein de l'Agence JMLR a choisi Claude Monet. L'objectif était de structurer une identité d'autorité apte à séduire le public institutionnel (B2B) via des modules interactifs d'enchères, tout en engageant les acheteurs d'éditions limitées (B2C) par des mécaniques de drops éphémères calquées sur la lumière naturelle et les heures de création des toiles.
+      </p>
+
+      <p class="projet-desc">
+        Pour la dimension audiovisuelle du projet, j'ai réalisé une vidéo orientée storytelling. Elle retrace cette vision croisée entre la pureté organique du geste impressionniste d'époque et son déploiement sur les plateformes numériques d'aujourd'hui (Instagram, TikTok, LinkedIn), valorisant des contenus immersifs et sensoriels axés sur l'ASMR visuel.
+      </p>
+
+      <ul class="features-list">
+        <li>Conception du plan de communication global et positionnement de marque</li>
+        <li>Écriture du script et réalisation de la vidéo storytelling</li>
+        <li>Direction artistique et design d'interface adaptatif (Thèmes Jour / Nuit)</li>
+        <li>Déclinaison de l'identité visuelle sur les supports sociaux & professionnels</li>
+        <li>Création d'un tunnel de conversion fondé sur la rareté temporelle</li>
+      </ul>
+
+      <div class="projet-tools-label">Logiciels & Outils</div>
+      <div class="projet-tools">
+        <span class="projet-tool">Adobe Premiere Pro</span>
+        <span class="projet-tool">Adobe Photoshop</span>
+        <span class="projet-tool">Stratégie Social Média</span>
+        <span class="projet-tool">Copywriting</span>
+      </div>
+
+      <div>
+        <a href="../monet.pdf" download="Claude_Monet_Dossier_Strategique_Jordan_Culot.pdf" class="btn-download">
+          📂 Télécharger le dossier stratégique (PDF) →
+        </a>
+      </div>
+    </div>
+
+  </section>
+</main>
+
+<footer>
+  <div class="footer-brand">Jordan Culot</div>
+  <div class="footer-socials">
+    <a href="https://www.linkedin.com/in/jordan-culot-34a53b3ab" class="fsocial" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    <a href="https://github.com/" class="fsocial" target=\"_blank\" rel=\"noopener noreferrer\">GitHub</a>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('navToggle').addEventListener('click', function() {
+    const open = document.getElementById('navLinks').classList.toggle('open');
+    this.setAttribute('aria-expanded', open);
+  });
+  const revObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+  }, { threshold: 0.05 });
+  document.querySelectorAll('.reveal').forEach(r => revObs.observe(r));
+</script>
+</body>
+</html>
