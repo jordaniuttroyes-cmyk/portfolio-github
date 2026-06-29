@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Projet Insomnia - Escape Game Nocturne, de l'animatique au spot final, Jordan Culot.">
-  <title>Projet Insomnia (SAÉ)  Jordan Culot</title>
+  <meta name="description" content="Étude de cas approfondie du Projet Insomnia : Conception d'un écosystème numérique pour escape game nocturne. De l'animatique au spot publicitaire, Jordan Culot.">
+  <title>Projet Insomnia (SAÉ) — Jordan Culot</title>
   <link rel="stylesheet" href="../style.css">
   <style>
     .nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
@@ -27,7 +27,7 @@
     .video-showcase {
       display: flex;
       flex-direction: column;
-      gap:32px;
+      gap:36px;
     }
     .video-player-wrap {
       border-radius:8px;
@@ -94,8 +94,9 @@
 
     .projet-desc {
       font-family:'Cormorant Garamond',serif;
-      font-size:17px; color:var(--ink2);
-      line-height:1.85; margin-bottom:32px;
+      font-size:16.5px; color:var(--ink2);
+      line-height:1.8; margin-bottom:24px;
+      text-align:justify;
     }
 
     .tech-highlights {
@@ -122,6 +123,7 @@
       font-family:'Josefin Sans',sans-serif;
       font-size:9px; letter-spacing:2px; text-transform:uppercase;
       color:var(--gold); margin-bottom:14px;
+      margin-top:10px;
     }
     .features-list {
       list-style:none; display:flex; flex-direction:column; gap:10px;
@@ -174,38 +176,39 @@
     <div class="video-showcase reveal">
       
       <div>
-        <div class="features-label" style="margin-bottom:8px;">[Après] Version Finale</div>
+        <div class="features-label" style="margin-bottom:8px;">[Étape 1 — Avant] Animatique de Pré-production</div>
         <div class="video-player-wrap">
           <div class="video-player-bar">
             <div class="vbar-dots"><div class="vbar-dot"></div><div class="vbar-dot"></div><div class="vbar-dot"></div></div>
-            <div class="vbar-label">Spot Publicitaire Officiel - Insomnia</div>
+            <div class="vbar-label">Storyboard Animé &amp; Intentions de Réalisation</div>
           </div>
           <div class="video-embed">
-            <iframe src="https://www.youtube.com/embed/z2GuNxogHw4?rel=0" allowfullscreen title="Spot Publicitaire Final"></iframe>
+            <iframe src="https://www.youtube.com/embed/bwS6VewKdSg?rel=0&modestbranding=1" allowfullscreen title="Animatique préparatoire"></iframe>
           </div>
         </div>
       </div>
 
       <div>
-        <div class="features-label" style="margin-bottom:8px;">[Avant] Animatique de Préparations</div>
+        <div class="features-label" style="margin-bottom:8px;">[Étape 2 — Après] Rendu Finalisé</div>
         <div class="video-player-wrap">
+          <div class="video-player-wrap" style="box-shadow: 0 20px 40px rgba(184,151,58,0.15);">
           <div class="video-player-bar">
             <div class="vbar-dots"><div class="vbar-dot"></div><div class="vbar-dot"></div><div class="vbar-dot"></div></div>
-            <div class="vbar-label">Storyboard Animé &amp; Préquel - Maquette de travail</div>
+            <div class="vbar-label">Spot Publicitaire Officiel — Insomnia</div>
           </div>
           <div class="video-embed">
-            <iframe src="https://www.youtube.com/embed/bwS6VewKdSg?rel=0" allowfullscreen title="Animatique de travail"></iframe>
+            <iframe src="https://www.youtube.com/embed/z2GuNxogHw4?rel=0&modestbranding=1" allowfullscreen title="Spot Publicitaire Final"></iframe>
           </div>
         </div>
       </div>
 
     </div>
 
-    <div class="reveal">
+    <div class="reveal" style="transition-delay: 0.1s;">
       <div class="projet-meta-row">
         <div>
           <div class="projet-meta-label">Catégorie</div>
-          <div class="projet-meta-val">Web · Audiovisuel</div>
+          <div class="projet-meta-val">Web design · Audiovisuel</div>
         </div>
         <div>
           <div class="projet-meta-label">Contexte</div>
@@ -220,36 +223,41 @@
       <h1 class="projet-title">Projet <em>Insomnia</em></h1>
 
       <p class="projet-desc">
-        Dans le cadre de la SAÉ finale de BUT MMI, réalisée en équipe, nous avons conçu l'écosystème numérique complet d'<strong>Insomnia</strong>, un concept immersif d'escape game nocturne.<br><br>
-        Cette page met en lumière le processus de production audiovisuelle : depuis l'<strong>animatique préparatoire</strong> (conception des plans, minutage et intentions de réalisation) jusqu'au <strong>spot publicitaire finalisé</strong> tourné en conditions réelles.
+        Dans le cadre de la SAÉ finale de BUT MMI, réalisée en équipe, nous avons conçu l'écosystème numérique complet d'<strong>Insomnia</strong>, un concept fictif immersif d'escape game nocturne à l'échelle d'une ville entière. Ce projet à 360° nécessitait une cohérence parfaite entre les supports web et l'identité de marque audiovisuelle.
+      </p>
+      
+      <p class="projet-desc">
+        Cette page met en lumière notre méthodologie de production audiovisuelle à travers un comparatif direct. L'<strong>animatique préparatoire</strong> a d'abord permis de poser la narration, le minutage sonore, le rythme du montage et les intentions de cadrage. Cette base structurelle rigoureuse a guidé l'ensemble de notre équipe lors du tournage réel, garantissant l'efficacité visuelle et l'angoisse psychologique du <strong>spot publicitaire finalisé</strong>.
       </p>
 
-      <div class="features-label">Écosystème du Projet</div>
+      <div class="features-label">Architecture du Projet</div>
       <div class="tech-highlights">
         <div class="tech-card">
           <div class="tech-card-icon">🎬</div>
-          <div class="tech-card-label">Production</div>
-          <div class="tech-card-val">Tournage, acting et montage du spot publicitaire de marque.</div>
+          <div class="tech-card-label">Production &amp; Réalisation</div>
+          <div class="tech-card-val">Tournage de nuit en conditions réelles, direction d'acteurs et post-production complète du spot publicitaire.</div>
         </div>
         <div class="tech-card">
           <div class="tech-card-icon">✏️</div>
-          <div class="tech-card-label">Pré-production</div>
-          <div class="tech-card-val">Création de l'animatique pour fixer le rythme et le cadrage en amont.</div>
+          <div class="tech-card-label">Pré-production graphique</div>
+          <div class="tech-card-val">Création de l'animatique illustrative pour fixer le rythme narratif et valider le découpage technique en amont.</div>
         </div>
       </div>
 
-      <div class="features-label">Compétences mobilisées</div>
+      <div class="features-label">Compétences transversales mobilisées</div>
       <ul class="features-list">
-        <li>Définition du rythme narratif et découpage technique (Animatique)</li>
-        <li>Tournage, gestion de l'éclairage nocturne et de la prise de vue</li>
-        <li>Post-production, étalonnage et synchronisation sonore sous Premiere Pro</li>
+        <li><strong>Scénarisation &amp; Découpage technique :</strong> Traduction du concept en plans séquences et établissement du script sonore (voix off et bruitages).</li>
+        <li><strong>Gestion de tournage nocturne :</strong> Prise de vue sous contrainte de faible luminosité, gestion de l'éclairage artificiel et directivité des micros.</li>
+        <li><strong>Post-production avancée :</strong> Montage dynamique, étalonnage colorimétrique pour renforcer l'aspect oppressant, et sound design immersif sous Premiere Pro.</li>
+        <li><strong>Direction Artistique :</strong> Maintien d'un univers sombre et mystérieux, en parfaite adéquation avec la charte graphique web développée en parallèle.</li>
       </ul>
 
-      <div class="features-label">Logiciels utilisés</div>
+      <div class="features-label">Logiciels &amp; Outils utilisés</div>
       <div class="projet-tools">
         <span class="projet-tool">Premiere Pro</span>
         <span class="projet-tool">After Effects</span>
-        <span class="projet-tool">Illustrator / Photoshop</span>
+        <span class="projet-tool">Adobe Illustrator</span>
+        <span class="projet-tool">Adobe Photoshop</span>
       </div>
     </div>
 
