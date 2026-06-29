@@ -3,6 +3,102 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Sélection de projets web, design et audiovisuels réalisés par Jordan Culot.">
+  <title>Projets — Jordan Culot</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .nav-toggle { display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:4px; }
+    .nav-toggle span { display:block; width:22px; height:1.5px; background:var(--ink); transition:all 0.3s; }
+    @media (max-width:960px) {
+      .nav-toggle { display:flex; }
+      .nav-links { display:none; position:absolute; top:100%; left:0; right:0; background:rgba(245,240,232,0.97); backdrop-filter:blur(16px); border-bottom:1px solid var(--border); flex-direction:column; padding:16px 24px; gap:0; }
+      .nav-links.open { display:flex; }
+      .nav-link { padding:14px 0; border-bottom:1px solid var(--border); }
+    }
+  </style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Aller au contenu principal</a>
+
+<nav>
+  <a href="../index.html" class="nav-logo">Jordan <em>Culot</em></a>
+  <div class="nav-links" id="navLinks">
+    <a href="projets.html"    class="nav-link active">Projets</a>
+    <a href="dessins.html"    class="nav-link">Dessins</a>
+    <a href="photos.html"     class="nav-link">Photos</a>
+    <a href="videos.html"     class="nav-link">Vidéos</a>
+    <a href="animations.html" class="nav-link">Animations</a>
+    <a href="apropos.html"    class="nav-link">À propos</a>
+    <a href="contact.html"    class="nav-link">Contact</a>
+  </div>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<main id="main-content">
+<section style="padding-top:140px; min-height:80vh;">
+  <div class="section-eyebrow reveal">Portfolio</div>
+  <h1 class="section-title reveal">Études de <em>Cas</em></h1>
+
+  <div class="projets-grid">
+
+    <a href="projet-monet.html" class="projet-card reveal">
+      <div class="pcard-img-wrap">
+        <div class="pcard-img" style="background-image:url('https://img.youtube.com/vi/e1MHH5uJZm4/maxresdefault.jpg');"></div>
+        <div class="pcard-overlay">
+          <div class="pcard-arrow">Lire l'étude →</div>
+        </div>
+      </div>
+      <div class="pcard-meta">
+        <div class="pcard-tag">SAÉ · Communication &amp; Vidéo</div>
+        <h2 class="pcard-title">Claude Monet — Stratégie Digitale</h2>
+        <p class="pcard-desc">Conception d'un écosystème numérique contemporain et réalisation d'une vidéo storytelling immersive pour le maître impressionniste.</p>
+      </div>
+    </a>
+
+    <a href="projet-insomnia.html" class="projet-card reveal">
+      <div class="pcard-img-wrap">
+        <div class="pcard-img" style="background-image:url('https://img.youtube.com/vi/z2GuNxogHw4/maxresdefault.jpg');"></div>
+        <div class="pcard-overlay">
+          <div class="pcard-arrow">Lire l'étude →</div>
+        </div>
+      </div>
+      <div class="pcard-meta">
+        <div class="pcard-tag">SAÉ Finale · Web &amp; Audiovisuel</div>
+        <h2 class="pcard-title">Projet Insomnia — Escape Game</h2>
+        <p class="pcard-desc">Dispositif digital complet pour un jeu immersif urbain nocturne. Découverte de l'animatique préparatoire et du spot publicitaire.</p>
+      </div>
+    </a>
+
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="footer-brand">Jordan Culot</div>
+  <div class="footer-socials">
+    <a href="https://www.linkedin.com/in/jordan-culot-34a53b3ab" class="fsocial" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    <a href="https://github.com/" class="fsocial" target="_blank" rel="noopener noreferrer">GitHub</a>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('navToggle').addEventListener('click', function() {
+    const open = document.getElementById('navLinks').classList.toggle('open');
+    this.setAttribute('aria-expanded', open);
+  });
+  const revObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(r => revObs.observe(r));
+</script>
+</body>
+</html><!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Projets de Jordan Culot  développement web, audiovisuel, communication numérique.">
   <title>Projets  Jordan Culot</title>
   <link rel="stylesheet" href="../style.css">
