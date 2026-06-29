@@ -148,8 +148,28 @@
         <div class="v-desc">Montage personnel sur la série Supernatural.</div>
         <div class="v-meta"><span>Premiere Pro</span><span>Montage</span></div>
       </div>
+    </div>*
+    
+<div class="v-card reveal" onclick="openVid('monet')">
+      <div class="v-thumb">
+        <div class="v-yt-thumb" style="background-image:url('https://img.youtube.com/vi/e1MHH5uJZm4/maxresdefault.jpg');"></div>
+        <div class="v-gradient"></div>
+        <div class="v-play"><div class="v-circle"><div class="v-tri"></div></div></div>
+        <div class="v-tag-type">Storytelling / SAÉ</div>
+      </div>
+      <div class="v-body">
+        <div class="v-title">Claude Monet — Stratégie Digitale</div>
+        <div class="v-desc">Vidéo storytelling immersive simulant l'écosystème numérique contemporain du maître impressionniste.</div>
+        <div class="v-meta"><span>Premiere Pro</span><span>Stratégie</span></div>
+        <div style="margin-top:14px; position:relative; z-index:2;">
+          <a href="projet-monet.html" style="
+            font-family:'Josefin Sans',sans-serif; font-size:9px; letter-spacing:2px; text-transform:uppercase;
+            color:var(--gold); text-decoration:none; border-bottom:1px solid var(--gold);
+            padding-bottom:2px; transition:opacity 0.2s;
+          ">Voir la page projet →</a>
+        </div>
+      </div>
     </div>
-
   </div>
 </section>
 </main>
@@ -183,6 +203,7 @@
   document.querySelectorAll('.reveal').forEach(r => revObs.observe(r));
 
   const vids = {
+    monet:      { title: 'Claude Monet — Stratégie Digitale',     youtubeId: 'e1MHH5uJZm4' },
     animatique: { title: 'Animatique - Escape Game Nocturne', youtubeId: 'bwS6VewKdSg' },
     insomnia:   { title: 'Spot Publicitaire - Projet Insomnia', youtubeId: 'z2GuNxogHw4' },
     valo:       { title: 'Montage Valorant',                    youtubeId: 'fIRQRpvKx4s' },
