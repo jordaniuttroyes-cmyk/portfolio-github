@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Stratégie digitale et storytelling vidéo pour Claude Monet, projet SAÉ - Jordan Culot.">
-  <title>Claude Monet Digital Strategy - Jordan Culot</title>
-  <link rel=\"stylesheet\" href=\"../style.css\">
+  <title>Projet Claude Monet — Jordan Culot</title>
+  <link rel="stylesheet" href="../style.css">
   <style>
     .nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
     .nav-toggle span{display:block;width:22px;height:1.5px;background:var(--ink);transition:all 0.3s}
@@ -13,161 +13,268 @@
       .nav-toggle{display:flex}
       .nav-links{display:none;position:absolute;top:100%;left:0;right:0;background:rgba(245,240,232,0.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);flex-direction:column;padding:16px 24px;gap:0}
       .nav-links.open{display:flex}
-      .nav-link{padding:14px 0;border-bottom:1px solid var(--border)}
+      .nav-link {padding:14px 0;border-bottom:1px solid var(--border)}
     }
 
     .projet-layout {
       display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:80px;
-      padding:120px 56px 80px;
-      max-width:1440px;
-      margin:0 auto;
+      grid-template-columns:1.1fr 0.9fr;
+      gap:60px;
+      align-items:start;
     }
-    .video-container {
-      position:relative;
-      width:100%;
-      padding-bottom:56.25%;
-      height:0;
-      background:#000;
+
+    /* Player vidéo */
+    .video-player-wrap {
+      border-radius:8px;
+      overflow:hidden;
       border:1px solid var(--border);
+      box-shadow:0 24px 60px var(--shadow);
+      background:#0a0a0a;
     }
-    .video-container iframe {
-      position:absolute;
-      top:0; left:0; width:100%; height:100%;
-      border:none;
+    .video-player-bar {
+      background:var(--cream2);
+      padding:10px 16px;
+      display:flex; align-items:center; gap:10px;
+      border-bottom:1px solid var(--border);
     }
+    .vbar-dots { display:flex; gap:6px; }
+    .vbar-dot { width:10px; height:10px; border-radius:50%; }
+    .vbar-dot:nth-child(1){background:#ff5f57}
+    .vbar-dot:nth-child(2){background:#febc2e}
+    .vbar-dot:nth-child(3){background:#28c840}
+    .vbar-label {
+      font-family:'Josefin Sans',sans-serif;
+      font-size:10px; color:var(--muted); letter-spacing:1px;
+      flex:1;
+    }
+    .video-embed {
+      position:relative; padding-bottom:56.25%;
+    }
+    .video-embed iframe {
+      position:absolute; inset:0; width:100%; height:100%; border:none;
+    }
+
+    /* Bouton PDF */
+    .btn-download {
+      display:inline-flex; align-items:center; gap:12px;
+      margin-top:24px;
+      font-family:'Josefin Sans',sans-serif;
+      font-size:10px; letter-spacing:2px; text-transform:uppercase;
+      color:var(--cream); text-decoration:none;
+      background:var(--ink); border:1px solid var(--ink);
+      padding:14px 24px; border-radius:2px;
+      transition:all 0.25s; font-weight:600;
+    }
+    .btn-download:hover { background:transparent; color:var(--ink); }
+
+    /* Info droite */
+    .projet-back {
+      display:inline-flex; align-items:center; gap:8px;
+      font-family:'Josefin Sans',sans-serif;
+      font-size:10px; letter-spacing:2px; text-transform:uppercase;
+      color:var(--gold); text-decoration:none;
+      margin-bottom:40px; transition:gap 0.2s;
+    }
+    .projet-back:hover { gap:14px; }
+
+    .projet-meta-row {
+      display:flex; flex-wrap:wrap; gap:28px;
+      margin-bottom:32px; padding-bottom:28px;
+      border-bottom:1px solid var(--border);
+    }
+    .projet-meta-label {
+      font-family:'Josefin Sans',sans-serif;
+      font-size:9px; letter-spacing:2px; text-transform:uppercase;
+      color:var(--gold); margin-bottom:5px;
+    }
+    .projet-meta-val {
+      font-family:'Cormorant Garamond',serif;
+      font-size:15px; color:var(--ink2);
+    }
+
     .projet-title {
-      font-family:'Playfair Display', serif;
-      font-size:clamp(36px, 5vw, 54px);
-      color:var(--ink);
-      margin-bottom:16px;
-      line-height:1.1;
+      font-family:'Playfair Display',serif;
+      font-size:clamp(28px,4vw,48px);
+      font-weight:700; line-height:1.1;
+      color:var(--ink); margin-bottom:20px;
     }
-    .projet-subtitle {
-      font-family:'Josefin Sans', sans-serif;
-      font-size:11px; letter-spacing:4px; text-transform:uppercase;
-      color:var(--gold); margin-bottom:40px;
-    }
+    .projet-title em { color:var(--gold); font-style:italic; }
+
     .projet-desc {
-      font-family:'Cormorant Garamond', serif;
-      font-size:20px; line-height:1.6;
-      color:var(--ink2); margin-bottom:32px;
-      text-align:justify;
+      font-family:'Cormorant Garamond',serif;
+      font-size:17px; color:var(--ink2);
+      line-height:1.85; margin-bottom:32px;
+    }
+
+    .tech-highlights {
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:12px; margin-bottom:32px;
+    }
+    .tech-card {
+      background:#fff; border:1px solid var(--border);
+      border-radius:4px; padding:14px 16px;
+      display:flex; flex-direction:column; gap:4px;
+    }
+    .tech-card-icon { font-size:18px; margin-bottom:2px; }
+    .tech-card-label {
+      font-family:'Josefin Sans',sans-serif;
+      font-size:8px; letter-spacing:2px; text-transform:uppercase;
+      color:var(--gold);
+    }
+    .tech-card-val {
+      font-family:'Cormorant Garamond',serif;
+      font-size:14px; color:var(--ink2); line-height:1.4;
+    }
+
+    .features-label {
+      font-family:'Josefin Sans',sans-serif;
+      font-size:9px; letter-spacing:2px; text-transform:uppercase;
+      color:var(--gold); margin-bottom:14px;
     }
     .features-list {
-      margin:0 0 40px 0; padding-left:20px;
-      font-family:'Cormorant Garamond', serif;
-      font-size:19px; color:var(--ink2);
-      display:flex; flex-direction:column; gap:12px;
+      list-style:none; display:flex; flex-direction:column; gap:10px;
+      margin-bottom:32px;
     }
+    .features-list li {
+      font-family:'Cormorant Garamond',serif;
+      font-size:16px; color:var(--ink2);
+      display:flex; align-items:baseline; gap:10px;
+    }
+    .features-list li::before { content:'•'; color:var(--gold); flex-shrink:0; font-size:12px; margin-right:8px; }
+
     .projet-tools-label {
-      font-family:'Josefin Sans', sans-serif;
-      font-size:11px; letter-spacing:2px; text-transform:uppercase;
-      color:var(--muted); margin-bottom:16px;
+      font-family:'Josefin Sans',sans-serif;
+      font-size:9px; letter-spacing:2px; text-transform:uppercase;
+      color:var(--gold); margin-bottom:12px;
     }
-    .projet-tools { display:flex; flex-wrap:wrap; gap:12px; margin-bottom:48px; }
+    .projet-tools { display:flex; flex-wrap:wrap; gap:8px; }
     .projet-tool {
-      font-family:'Josefin Sans', sans-serif;
-      font-size:12px; letter-spacing:1px;
-      padding:8px 16px;
-      background:var(--cream2);
-      border:1px solid var(--border);
-      color:var(--ink);
+      font-family:'Josefin Sans',sans-serif;
+      font-size:9px; letter-spacing:1.5px; text-transform:uppercase;
+      padding:6px 14px; border:1px solid var(--border);
+      color:var(--muted); border-radius:2px;
     }
-    .btn-download {
-      display:inline-block;
-      font-family:'Josefin Sans', sans-serif;
-      font-size:12px; letter-spacing:2px; text-transform:uppercase;
-      color:var(--cream); background:var(--ink);
-      padding:16px 32px; border:1px solid var(--ink);
-      text-decoration:none; transition:all 0.3s ease;
-    }
-    .btn-download:hover {
-      background:transparent; color:var(--ink);
-    }
-    @media(max-width:960px){
-      .projet-layout { grid-template-columns:1fr; gap:48px; padding:100px 24px 60px; }
+
+    @media(max-width:860px){
+      .projet-layout { grid-template-columns:1fr; gap:40px; }
     }
   </style>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Aller au contenu principal</a>
 
-<a href="#content" class="skip-link">Aller au contenu</a>
-
-<header>
-  <div class="nav-container">
-    <a href="../index.html" class="logo">Jordan Culot</a>
-    <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false">
-      <span></span><span></span>
-    </button>
-    <nav class="nav-links" id="navLinks">
-      <a href="../index.html" class="nav-link">Accueil</a>
-      <a href="illustrations.html" class="nav-link">Illustrations</a>
-      <a href="photos.html" class="nav-link">Photos</a>
-      <a href="videos.html" class="nav-link active">Vidéos</a>
-      <a href="animations.html" class="nav-link">Animations</a>
-      <a href="apropos.html" class="nav-link">À propos</a>
-    </nav>
+<nav>
+  <a href="../index.html" class="nav-logo">Jordan <em>Culot</em></a>
+  <div class="nav-links" id="navLinks">
+    <a href="projets.html"    class="nav-link active">Projets</a>
+    <a href="dessins.html"    class="nav-link">Dessins</a>
+    <a href="photos.html"     class="nav-link">Photos</a>
+    <a href="videos.html"     class="nav-link">Vidéos</a>
+    <a href="animations.html" class="nav-link">Animations</a>
+    <a href="apropos.html"    class="nav-link">À propos</a>
+    <a href="contact.html"    class="nav-link">Contact</a>
   </div>
-</header>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
 
-<main id="content">
-  <section class="projet-layout">
-    
+<main id="main-content">
+<section style="padding-top:140px;">
+  <a href="projets.html" class="projet-back reveal">← Retour aux projets</a>
+
+  <div class="projet-layout">
+
     <div class="reveal">
-      <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/e1MHH5uJZm4?rel=0&modestbranding=1" 
-                allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>
+      <div class="video-player-wrap">
+        <div class="video-player-bar">
+          <div class="vbar-dots">
+            <div class="vbar-dot"></div>
+            <div class="vbar-dot"></div>
+            <div class="vbar-dot"></div>
+          </div>
+          <div class="vbar-label">Vidéo Storytelling - Claude Monet</div>
+        </div>
+        <div class="video-embed">
+          <iframe
+            src="https://www.youtube.com/embed/e1MHH5uJZm4?rel=0&modestbranding=1"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            title="Vidéo Storytelling - Claude Monet">
+          </iframe>
+        </div>
       </div>
+      
+      <a href="../monet.pdf" download="Claude_Monet_Dossier_Strategique_Jordan_Culot.pdf" class="btn-download">
+        📂 Télécharger le dossier stratégique (PDF) →
+      </a>
     </div>
 
-    <div class="reveal" style="transition-delay: 0.1s;">
-      <h1 class="projet-title">Claude Monet</h1>
-      <div class="projet-subtitle">Stratégie Digitale & Storytelling Vidéo (SAÉ)</div>
-      
-      <p class="projet-desc">
-        Dans le cadre de cette SAÉ, la problématique imposée consistait à imaginer l'écosystème digital complet d'un artiste illustre disparu s'il devait s'installer sur le marché de l'art contemporain actuel. Notre équipe au sein de l'Agence JMLR a choisi Claude Monet. L'objectif était de structurer une identité d'autorité apte à séduire le public institutionnel (B2B) via des modules interactifs d'enchères, tout en engageant les acheteurs d'éditions limitées (B2C) par des mécaniques de drops éphémères calquées sur la lumière naturelle et les heures de création des toiles.
-      </p>
+    <div class="reveal">
+      <div class="projet-meta-row">
+        <div>
+          <div class="projet-meta-label">Catégorie</div>
+          <div class="projet-meta-val">Stratégie Digitale · Audiovisuel</div>
+        </div>
+        <div>
+          <div class="projet-meta-label">Contexte</div>
+          <div class="projet-meta-val">SAÉ · BUT MMI (Agence JMLR)</div>
+        </div>
+        <div>
+          <div class="projet-meta-label">Livrables</div>
+          <div class="projet-meta-val">Dossier Stratégique &amp; Vidéo</div>
+        </div>
+      </div>
+
+      <h1 class="projet-title">Stratégie <em>Claude Monet</em></h1>
 
       <p class="projet-desc">
-        Pour la dimension audiovisuelle du projet, j'ai réalisé une vidéo orientée storytelling. Elle retrace cette vision croisée entre la pureté organique du geste impressionniste d'époque et son déploiement sur les plateformes numériques d'aujourd'hui (Instagram, TikTok, LinkedIn), valorisant des contenus immersifs et sensoriels axés sur l'ASMR visuel.
+        Dans le cadre de cette SAÉ menée par l'Agence JMLR, nous avons imaginé l'écosystème numérique d'un artiste peintre illustre et disparu s'il devait s'insérer sur le marché de l'art d'aujourd'hui. Notre choix s'est porté sur <strong>Claude Monet</strong>.<br><br>
+        L'objectif consistait à concevoir un écosystème à double entrée : asseoir une crédibilité institutionnelle (B2B) via des systèmes d'enchères en ligne privées, et capter un public d'amateurs d'art (B2C) par des mécaniques de drops éphémères fondées sur la météo et la luminosité des toiles. Pour le volet audiovisuel, j'ai réalisé une vidéo de <strong>storytelling immersive</strong> mariant l'essence historique du travail de l'impressionniste à ses applications modernes de diffusion sociale.
       </p>
 
+      <div class="features-label">Axes de l'écosystème web</div>
+      <div class="tech-highlights">
+        <div class="tech-card">
+          <div class="tech-card-icon">🌗</div>
+          <div class="tech-card-label">Interface adaptative</div>
+          <div class="tech-card-val">Maquettage d'un site web changeant automatiquement de thème selon les heures du jour.</div>
+        </div>
+        <div class="tech-card">
+          <div class="tech-card-icon">⏳</div>
+          <div class="tech-card-label">Rareté Temporelle</div>
+          <div class="tech-card-val">Ventes privées de tirages d'art accessibles uniquement durant les fenêtres de crépuscule.</div>
+        </div>
+      </div>
+
+      <div class="features-label">Compétences mobilisées</div>
       <ul class="features-list">
-        <li>Conception du plan de communication global et positionnement de marque</li>
-        <li>Écriture du script et réalisation de la vidéo storytelling</li>
-        <li>Direction artistique et design d'interface adaptatif (Thèmes Jour / Nuit)</li>
-        <li>Déclinaison de l'identité visuelle sur les supports sociaux & professionnels</li>
-        <li>Création d'un tunnel de conversion fondé sur la rareté temporelle</li>
+        <li>Conception et montage rythmé d'une vidéo storytelling de marque</li>
+        <li>Écriture du script (copywriting) et recherche documentaire</li>
+        <li>Définition d'une stratégie de contenus digitaux multi-plateformes</li>
+        <li>Positionnement marketing de prestige (marché de l'art contemporain)</li>
       </ul>
 
-      <div class="projet-tools-label">Logiciels & Outils</div>
+      <div class="projet-tools-label">Logiciels &amp; Compétences</div>
       <div class="projet-tools">
-        <span class="projet-tool">Adobe Premiere Pro</span>
-        <span class="projet-tool">Adobe Photoshop</span>
-        <span class="projet-tool">Stratégie Social Média</span>
+        <span class="projet-tool">Premiere Pro</span>
+        <span class="projet-tool">Photoshop</span>
+        <span class="projet-tool">Social Media Strategy</span>
         <span class="projet-tool">Copywriting</span>
-      </div>
-
-      <div>
-        <a href="../monet.pdf" download="Claude_Monet_Dossier_Strategique_Jordan_Culot.pdf" class="btn-download">
-          📂 Télécharger le dossier stratégique (PDF) →
-        </a>
       </div>
     </div>
 
-  </section>
+  </div>
+</section>
 </main>
 
 <footer>
   <div class="footer-brand">Jordan Culot</div>
   <div class="footer-socials">
     <a href="https://www.linkedin.com/in/jordan-culot-34a53b3ab" class="fsocial" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-    <a href="https://github.com/" class="fsocial" target=\"_blank\" rel=\"noopener noreferrer\">GitHub</a>
+    <a href="https://github.com/" class="fsocial" target="_blank" rel="noopener noreferrer">GitHub</a>
   </div>
 </footer>
-
 <script>
   document.getElementById('navToggle').addEventListener('click', function() {
     const open = document.getElementById('navLinks').classList.toggle('open');
