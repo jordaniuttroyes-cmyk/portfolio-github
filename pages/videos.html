@@ -21,6 +21,61 @@
     @media (max-width:760px) {
       .videos-grid { grid-template-columns:1fr; }
     }
+
+    /* Correction forcée du lecteur de vidéo modale invisible */
+    .v-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 10, 10, 0.95);
+      backdrop-filter: blur(8px);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .v-modal.open {
+      display: flex;
+    }
+    .v-modal-content {
+      width: 100%;
+      max-width: 800px;
+      background: #111;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
+    .v-modal-header {
+      padding: 14px 20px;
+      color: #fff;
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      background: #161616;
+    }
+    .v-modal-body {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      background: #000;
+    }
+    .v-modal-body iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: none;
+    }
+    .v-modal-close {
+      position: absolute;
+      top: 20px; right: 20px;
+      background: none; border: none;
+      color: #fff; font-size: 24px;
+      cursor: pointer; opacity: 0.7;
+      transition: opacity 0.2s;
+      z-index: 10000;
+    }
+    .v-modal-close:hover { opacity: 1; }
   </style>
 </head>
 <body>
@@ -107,7 +162,7 @@
 
     <div class="v-card reveal" onclick="openVid('pepsi')">
       <div class="v-thumb">
-        <div class="v-yt-thumb" style="background-image:url('https://img.youtube.com/vi/rPnf3pmz3gw');"></div>
+        <div class="v-yt-thumb" style="background-image:url('https://img.youtube.com/vi/rPnf3pmz3gw/maxresdefault.jpg');"></div>
         <div class="v-gradient"></div>
         <div class="v-play"><div class="v-circle"><div class="v-tri"></div></div></div>
         <div class="v-tag-type">Montage Rythmique</div>
@@ -157,24 +212,4 @@
     monet:      { title: 'Claude Monet — Stratégie Digitale',     youtubeId: 'e1MHH5uJZm4' },
     insomnia:   { title: 'Projet Insomnia — Spot Publicitaire', youtubeId: 'z2GuNxogHw4' },
     valo:       { title: 'Montage Valorant',                    youtubeId: 'fIRQRpvKx4s' },
-    pepsi:      { title: 'Montage Supernatural',                youtubeId: 'rPnf3pmz3gw' }
-  };
-
-  function openVid(key) {
-    const v = vids[key];
-    document.getElementById('vmodalTitle').textContent = v.title;
-    document.getElementById('vmodalPlayer').innerHTML =
-      `<iframe src="https://www.youtube.com/embed/${v.youtubeId}?autoplay=1&rel=0&modestbranding=1"
-       allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>`;
-    document.getElementById('vmodal').classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeVid() {
-    document.getElementById('vmodalPlayer').innerHTML = '';
-    document.getElementById('vmodal').classList.remove('open');
-    document.body.style.overflow = '';
-  }
-</script>
-</body>
-</html>
+    pepsi:      { title: 'Montage Supernatural',                youtube
