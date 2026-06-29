@@ -155,3 +155,84 @@
       </div>
       <div class="v-body">
         <div class="v-title">Montage Valorant</div>
+        <div class="v-desc">Exercice de synchronisation audio-visuelle dynamique et d'effets de transition sur du gameplay compétitif.</div>
+        <div class="v-meta"><span>Premiere Pro</span><span>Dynamique</span></div>
+      </div>
+    </div>
+
+    <div class="v-card reveal" onclick="openVid('pepsi')">
+      <div class="v-thumb">
+        <div class="v-yt-thumb" style="background-image:url('https://img.youtube.com/vi/rPnf3pmz3gw/maxresdefault.jpg');"></div>
+        <div class="v-gradient"></div>
+        <div class="v-play"><div class="v-circle"><div class="v-tri"></div></div></div>
+        <div class="v-tag-type">Montage Rythmique</div>
+      </div>
+      <div class="v-body">
+        <div class="v-title">Montage Supernatural</div>
+        <div class="v-desc">Travail de découpe et d'harmonisation de clips vidéo synchronisés sur une bande-son publicitaire.</div>
+        <div class="v-meta"><span>Premiere Pro</span><span>Sound Design</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+</main>
+
+<div class="v-modal" id="vmodal" onclick="closeVid()">
+  <button class="v-modal-close" onclick="closeVid()" aria-label="Fermer la vidéo">✕</button>
+  <div class="v-modal-content" onclick="event.stopPropagation()">
+    <div class="v-modal-header" id="vmodalTitle">Titre de la vidéo</div>
+    <div class="v-modal-body" id="vmodalPlayer"></div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-brand">Jordan Culot</div>
+  <div class="footer-socials">
+    <a href="https://www.linkedin.com/in/jordan-culot-34a53b3ab" class="fsocial" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    <a href="https://github.com/" class="fsocial" target="_blank" rel="noopener noreferrer">GitHub</a>
+  </div>
+</footer>
+
+<script>
+  // Menu Mobile Toggle
+  document.getElementById('navToggle').addEventListener('click', function() {
+    var open = document.getElementById('navLinks').classList.toggle('open');
+    this.setAttribute('aria-expanded', open);
+  });
+
+  // Animation Intersection Observer
+  var revObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) e.target.classList.add('vis');
+    });
+  }, { threshold: 0.1 });
+  
+  document.querySelectorAll('.reveal').forEach(function(r) {
+    revObs.observe(r);
+  });
+
+  // Base de données des vidéos YouTube
+  var vids = {
+    monet: { title: 'Claude Monet — Stratégie Digitale', youtubeId: 'e1MHH5uJZm4' },
+    insomnia: { title: 'Projet Insomnia — Spot Publicitaire', youtubeId: 'z2GuNxogHw4' },
+    valo: { title: 'Montage Valorant', youtubeId: 'fIRQRpvKx4s' },
+    pepsi: { title: 'Montage Supernatural', youtubeId: 'rPnf3pmz3gw' }
+  };
+
+  function openVid(key) {
+    var v = vids[key];
+    document.getElementById('vmodalTitle').textContent = v.title;
+    document.getElementById('vmodalPlayer').innerHTML = '<iframe src="https://www.youtube.com/embed/' + v.youtubeId + '?autoplay=1&rel=0&modestbranding=1" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>';
+    document.getElementById('vmodal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeVid() {
+    document.getElementById('vmodalPlayer').innerHTML = '';
+    document.getElementById('vmodal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+</script>
+</body>
+</html>
