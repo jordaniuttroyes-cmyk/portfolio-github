@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Refonte de charte graphique : changement de nom, création de logo et identité visuelle complète pour un magasin de musique à Troyes, Jordan Culot.">
+  <title>Charte Graphique Mojo Tunes  Jordan Culot</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+    .nav-toggle span{display:block;width:22px;height:1.5px;background:var(--ink);transition:all 0.3s}
+    @media(max-width:960px){
+      .nav-toggle{display:flex}
+      .nav-links{display:none;position:absolute;top:100%;left:0;right:0;background:rgba(245,240,232,0.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);flex-direction:column;padding:16px 24px;gap:0}
+      .nav-links.open{display:flex}
+      .nav-link{padding:14px 0;border-bottom:1px solid var(--border)}
+    }
+
+    .projet-back {
+      display:inline-flex; align-items:center; gap:8px;
+      font-family:'Josefin Sans',sans-serif;
+      font-size:10px; letter-spacing:2px; text-transform:uppercase;
+      color:var(--gold); text-decoration:none;
+      margin-bottom:40px; transition:gap 0.2s;
+    }
+    .projet-back:hover { gap:14px; }
+
+    .projet-hero {
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:80px;
+      align-items:start;
+      margin-bottom:80px;
+    }
+
+    /* Galerie images */
+    .img-main {
+      border-radius:8px; overflow:hidden;
+      border:1px solid var(--border);
+      box-shadow:0 24px 60px var(--shadow);
+      background:#1a1a1a;
+    }
+    .img-main img {
+      width:100%; display:block;
+      transition:transform 0.5s;
+    }
+    .img-main:hover img { transform:scale(1.02); }
+
+    .img-thumbs {
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:12px; margin-top:12px;
+    }
+    .img-thumb {
+      border-radius:4px; overflow:hidden;
+      border:1px solid var(--border);
+      cursor:pointer; transition:border-color 0.2s, box-shadow 0.2s;
+    }
+    .img-thumb:hover { border-color:var(--gold); box-shadow:0 8px 24px var(--shadow); }
+    .img-thumb img { width:100%; display:block; object-fit:cover; aspect-ratio:3/4; background:#f5f0e8; }
+
+    .btn-download {
+      display:inline-flex; align-items:center; gap:12px;
+      margin-top:20px;
+      font-family:'Josefin Sans',sans-serif;
+      font-size:10px; letter-spacing:2px; text-transform:uppercase;
+      color:var(--cream); text-decoration:none;
+      background:var(--ink); border:1px solid var(--ink);
+      padding:14px 24px; border-radius:2px;
+      transition:all 0.25s; font-weight:600;
+    }
+    .btn-download:hover { background:transparent; color:var(--ink); }
+
+    /* Infos droite */
+    .projet-meta-row {
+      display:flex; flex-wrap:wrap; gap:28px;
+      margin-bottom:32px; padding-bottom:28px;
+      border-bottom:1px solid var(--border);
+    }
+    .projet-meta-label {
+      font-family:'Josefin Sans',sans-serif;
+      font-size:9px; letter-spacing:2px; text-transform:uppercase;
+      color:var(--gold); margin-bottom:5px;
+    }
+    .projet-meta-val {
+      font-family:'Cormorant Garamond',serif;
+      font-size:15px; color:var(--ink2);
+    }
+
+    .projet-title {
+      font-family:'Playfair Display',serif;
+      font-size:clamp(28px,4vw,48px);
+      font-weight:700; line-height:1.1;
+      color:var(--ink); margin-bottom:20px;
+    }
+    .projet-title em { color:var(--gold); font-style:italic; }
+
+    .projet-desc {
+      font-family:'Cormorant Garamond',serif;
+      font-size:17px; color:var(--ink2);
+      line-height:1.85; margin-bottom:32px;
+    }
+
+    /* Cards techniques */
+    .tech-highlights {
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:12px; margin-bottom:32px;
+    }
+    .tech-card {
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:4px;
+      padding:14px 16px;
+      display:flex; flex-direction:column; gap:4px;
+    }
+    .tech-card-label {
+      font-family:'Josefin Sans',sans-serif;
+      font-size:8px; letter-spacing:2px; text-transform:uppercase;
+      color:var(--gold);
+    }
+    .tech-card-val {
+      font-family:'Cormorant Garamond',serif;
+      font-size:14px; color:var(--ink2); line-height:1.4;
+    }
+
+    .features-label {
+      font-family:'Josefin Sans',sans-serif;
+      font-size:9px; letter-spacing:2px; text-transform:uppercase;
+      color:var(--gold); margin-bottom:14px;
+    }
+    .features-list {
+      list-style:none; display:flex; flex-direction:column; gap:10px;
+      margin-bottom:32px;
+    }
+    .features-list li {
+      font-family:'Cormorant Garamond',serif;
+      font-size:16px; color:var(--ink2);
+      display:flex; align-items:baseline; gap:10px;
+    }
+    .features-list li::before { content:'•'; color:var(--gold); flex-shrink:0; font-size:14px; }
+
+    .projet-tools-label {
+      font-family:'Josefin Sans',sans-serif;
+      font-size:9px; letter-spacing:2px; text-transform:uppercase;
+      color:var(--gold); margin-bottom:12px;
+    }
+    .projet-tools { display:flex; flex-wrap:wrap; gap:8px; }
+    .projet-tool {
+      font-family:'Josefin Sans',sans-serif;
+      font-size:9px; letter-spacing:1.5px; text-transform:uppercase;
+      padding:6px 14px; border:1px solid var(--border);
+      color:var(--muted); border-radius:2px;
+    }
+
+    /* Palette couleurs */
+    .palette-row { display:flex; gap:10px; margin-bottom:32px; flex-wrap:wrap; }
+    .swatch { display:flex; flex-direction:column; align-items:center; gap:6px; }
+    .swatch-color { width:44px; height:44px; border-radius:50%; border:1px solid var(--border); box-shadow:0 4px 10px var(--shadow); }
+    .swatch-code { font-family:'Josefin Sans',sans-serif; font-size:8px; letter-spacing:1px; color:var(--muted); }
+
+    /* Section livrables */
+    .livrables-section {
+      margin-top:80px;
+      padding-top:60px;
+      border-top:1px solid var(--border);
+    }
+    .livrables-title {
+      font-family:'Playfair Display',serif;
+      font-size:clamp(22px,3vw,34px);
+      font-weight:700; color:var(--ink);
+      margin-bottom:8px;
+    }
+    .livrables-title em { color:var(--gold); font-style:italic; }
+    .livrables-sub {
+      font-family:'Cormorant Garamond',serif;
+      font-size:17px; color:var(--muted);
+      font-style:italic; margin-bottom:48px;
+    }
+
+    .livrables-grid {
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:40px;
+    }
+    .livrable-card {
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:4px; overflow:hidden;
+      box-shadow:0 4px 20px var(--shadow);
+      transition:transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    }
+    .livrable-card:hover {
+      transform:translateY(-4px);
+      box-shadow:0 16px 40px var(--shadow);
+      border-color:var(--gold);
+    }
+    .livrable-card img {
+      width:100%; display:block;
+      object-fit:cover;
+      background:#1a1a1a;
+    }
+    .livrable-body {
+      padding:20px 22px;
+    }
+    .livrable-tag {
+      font-family:'Josefin Sans',sans-serif;
+      font-size:8px; letter-spacing:2px; text-transform:uppercase;
+      color:var(--gold); margin-bottom:6px;
+    }
+    .livrable-name {
+      font-family:'Playfair Display',serif;
+      font-size:17px; font-weight:700; color:var(--ink);
+      margin-bottom:6px;
+    }
+    .livrable-desc {
+      font-family:'Cormorant Garamond',serif;
+      font-size:14px; color:var(--muted);
+      line-height:1.6; font-style:italic;
+    }
+
+    /* Lightbox */
+    .lightbox {
+      position:fixed; inset:0; z-index:200;
+      background:rgba(10,8,4,0.94);
+      display:none; align-items:center; justify-content:center;
+      padding:40px; cursor:zoom-out;
+    }
+    .lightbox.open { display:flex; }
+    .lightbox img { max-width:100%; max-height:85vh; border-radius:4px; box-shadow:0 30px 80px rgba(0,0,0,0.6); }
+    .lightbox-close {
+      position:absolute; top:24px; right:32px;
+      font-family:'Josefin Sans',sans-serif;
+      font-size:10px; letter-spacing:2px; text-transform:uppercase;
+      background:transparent; color:rgba(255,255,255,0.7);
+      border:1px solid rgba(255,255,255,.2); padding:8px 16px;
+      cursor:pointer; border-radius:2px; transition:all 0.2s;
+    }
+    .lightbox-close:hover { color:var(--gold); border-color:var(--gold); }
+
+    @media(max-width:860px){
+      .projet-hero { grid-template-columns:1fr; gap:40px; }
+      .tech-highlights { grid-template-columns:1fr 1fr; }
+      .livrables-grid { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Aller au contenu principal</a>
+<nav>
+  <a href="../index.html" class="nav-logo">Jordan <em>Culot</em></a>
+  <div class="nav-links" id="navLinks">
+    <a href="projets.html"    class="nav-link active">Projets</a>
+    <a href="dessins.html"    class="nav-link">Dessins</a>
+    <a href="photos.html"     class="nav-link">Photos</a>
+    <a href="videos.html"     class="nav-link">Vidéos</a>
+    <a href="animations.html" class="nav-link">Animations</a>
+    <a href="apropos.html"    class="nav-link">À propos</a>
+    <a href="contact.html"    class="nav-link">Contact</a>
+  </div>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<main id="main-content">
+<section style="padding-top:140px;">
+  <a href="projets.html" class="projet-back reveal">← Retour aux projets</a>
+
+  <div class="projet-hero">
+
+    <!-- Galerie gauche -->
+    <div class="reveal">
+      <div class="img-main" onclick="openLight('../images/mojotunes_logo_full.jpg')">
+        <img src="../images/mojotunes_logo_full.jpg" alt="Logo final Mojo Tunes sur fond noir">
+      </div>
+      <div class="img-thumbs">
+        <div class="img-thumb" onclick="openLight('../images/mojotunes_declinaison.jpg')">
+          <img src="../images/mojotunes_declinaison.jpg" alt="Déclinaisons couleur et zone de sécurité du logo Mojo Tunes">
+        </div>
+        <div class="img-thumb" onclick="openLight('../images/mojotunes_mockup.jpg')">
+          <img src="../images/mojotunes_mockup.jpg" alt="Mockups Mojo Tunes, enseigne, vitrine, sweat, cartes de visite">
+        </div>
+      </div>
+      <a href="../mojotunes_charte_graphique.pdf" download="Mojo_Tunes_Charte_Graphique_Jordan_Culot.pdf" class="btn-download">
+        Télécharger la charte graphique complète (PDF) →
+      </a>
+    </div>
+
+    <!-- Infos droite -->
+    <div class="reveal">
+      <div class="projet-meta-row">
+        <div>
+          <div class="projet-meta-label">Catégorie</div>
+          <div class="projet-meta-val">Design graphique · Identité visuelle</div>
+        </div>
+        <div>
+          <div class="projet-meta-label">Contexte</div>
+          <div class="projet-meta-val">Atelier · BUT MMI</div>
+        </div>
+        <div>
+          <div class="projet-meta-label">Client</div>
+          <div class="projet-meta-val">Magasin de musique, Troyes</div>
+        </div>
+      </div>
+
+      <h1 class="projet-title">Refonte <em>Mojo Tunes</em></h1>
+
+      <p class="projet-desc">
+        Ce projet consistait à accompagner le <strong>changement de nom</strong> d'un magasin d'instruments de musique et d'accessoires basé à Troyes, et à construire de toutes pièces sa nouvelle identité visuelle sous le nom <strong>Mojo Tunes</strong>.<br><br>
+        J'ai conçu le <strong>logo</strong>, un lettrage inspiré du rock et du metal associé au pictogramme d'une batterie, puis développé l'ensemble de sa <strong>charte graphique</strong> : nuancier, typographies, grille de construction, pictogrammes, règles de déclinaison et zone de sécurité. Le tout a été finalisé par une série de <strong>mockups</strong> (vitrine, enseigne, cartes de visite, textile) pour projeter la marque dans son environnement réel.
+      </p>
+
+      <div class="features-label">Ce qui a été réalisé</div>
+      <div class="tech-highlights">
+        <div class="tech-card">
+          <div class="tech-card-label">Changement de nom</div>
+          <div class="tech-card-val">Repositionnement du magasin sous la nouvelle identité Mojo Tunes</div>
+        </div>
+        <div class="tech-card">
+          <div class="tech-card-label">Création du logo</div>
+          <div class="tech-card-val">Typographie dessinée à la main, pictogramme batterie, version avec baseline et favicon</div>
+        </div>
+        <div class="tech-card">
+          <div class="tech-card-label">Charte graphique</div>
+          <div class="tech-card-val">Nuancier, typographies, grille de construction et pictogrammes associés</div>
+        </div>
+        <div class="tech-card">
+          <div class="tech-card-label">Mockups</div>
+          <div class="tech-card-val">Vitrine de magasin, enseigne intérieure, cartes de visite et textile floqué</div>
+        </div>
+      </div>
+
+      <div class="features-label">Nuancier</div>
+      <div class="palette-row">
+        <div class="swatch"><div class="swatch-color" style="background:#000000;"></div><div class="swatch-code">#000000</div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#9c0001;"></div><div class="swatch-code">#9C0001</div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#ffffff;border:1px solid var(--border);"></div><div class="swatch-code">#FFFFFF</div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#efd719;"></div><div class="swatch-code">#EFD719</div></div>
+      </div>
+
+      <div class="features-label">Compétences mobilisées</div>
+      <ul class="features-list">
+        <li>Conception d'identité de marque et repositionnement suite à un changement de nom</li>
+        <li>Création d'un logotype et d'un pictogramme originaux dessinés à la main</li>
+        <li>Construction d'une charte graphique complète (nuancier, typographie, grille, zone de sécurité)</li>
+        <li>Déclinaison du logo sur différents fonds et supports (print, textile, enseigne)</li>
+        <li>Réalisation de mockups pour mettre en scène la marque sur des supports réels</li>
+      </ul>
+
+      <div class="projet-tools-label">Logiciels utilisés</div>
+      <div class="projet-tools">
+        <span class="projet-tool">Adobe Illustrator</span>
+        <span class="projet-tool">Adobe Photoshop</span>
+        <span class="projet-tool">Identité de marque</span>
+        <span class="projet-tool">Mockup</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Section livrables -->
+  <div class="livrables-section reveal">
+    <h2 class="livrables-title">Les <em>Livrables</em></h2>
+    <p class="livrables-sub">Du logo à la charte graphique complète, jusqu'à sa mise en situation</p>
+
+    <div class="livrables-grid">
+
+      <div class="livrable-card reveal" onclick="openLight('../images/mojotunes_logo.jpg')" style="cursor:pointer;">
+        <img src="../images/mojotunes_logo.jpg" alt="Logo Mojo Tunes, baseline, favicon et modularité" style="max-height:320px; object-position:top;">
+        <div class="livrable-body">
+          <div class="livrable-tag">Logo</div>
+          <div class="livrable-name">Logotype et modularité</div>
+          <div class="livrable-desc">Logo simple, version avec baseline « Instruments de musique et accessoires », favicon 24x24px et modularité du logotype à plusieurs échelles.</div>
+        </div>
+      </div>
+
+      <div class="livrable-card reveal" onclick="openLight('../images/mojotunes_declinaison.jpg')" style="cursor:pointer;">
+        <img src="../images/mojotunes_declinaison.jpg" alt="Déclinaisons couleur et zone de sécurité du logo Mojo Tunes" style="max-height:320px; object-position:top;">
+        <div class="livrable-body">
+          <div class="livrable-tag">Déclinaisons</div>
+          <div class="livrable-name">Déclinaisons et zone de sécurité</div>
+          <div class="livrable-desc">Versions noir sur blanc, blanc sur noir, sur fond foncé et clair, application sur photographie, et zones de sécurité du logo pour un usage cohérent.</div>
+        </div>
+      </div>
+
+      <div class="livrable-card reveal" onclick="openLight('../images/mojotunes_charte.jpg')" style="cursor:pointer;">
+        <img src="../images/mojotunes_charte.jpg" alt="Nuancier, typographie, grille et pictogrammes Mojo Tunes" style="max-height:320px; object-position:top;">
+        <div class="livrable-body">
+          <div class="livrable-tag">Charte graphique</div>
+          <div class="livrable-name">Nuancier, typographie et pictogrammes</div>
+          <div class="livrable-desc">Palette de couleurs, typographies Agency FB Bold et Source Sans, grille de construction et pictogrammes dédiés aux instruments et accessoires.</div>
+        </div>
+      </div>
+
+      <div class="livrable-card reveal" onclick="openLight('../images/mojotunes_mockup.jpg')" style="cursor:pointer;">
+        <img src="../images/mojotunes_mockup.jpg" alt="Mockups Mojo Tunes, cartes de visite, enseigne, vitrine, sweat" style="max-height:320px; object-position:top;">
+        <div class="livrable-body">
+          <div class="livrable-tag">Mise en situation</div>
+          <div class="livrable-name">Mockups</div>
+          <div class="livrable-desc">Cartes de visite, enseigne intérieure sur bois, vitrine du magasin à Troyes et sweat floqué : la marque appliquée sur des supports concrets.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+</main>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLight()">
+  <button class="lightbox-close" onclick="closeLight()">Fermer</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<footer>
+  <div class="footer-brand">Jordan Culot</div>
+  <div class="footer-socials">
+    <a href="https://www.linkedin.com/in/jordan-culot-34a53b3ab" class="fsocial" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    <a href="https://github.com/" class="fsocial" target="_blank" rel="noopener noreferrer">GitHub</a>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('navToggle').addEventListener('click', function() {
+    const open = document.getElementById('navLinks').classList.toggle('open');
+    this.setAttribute('aria-expanded', open);
+  });
+  const revObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+  }, { threshold: 0.05 });
+  document.querySelectorAll('.reveal').forEach(r => revObs.observe(r));
+
+  function openLight(src) {
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLight() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLight(); });
+</script>
+</body>
+</html>

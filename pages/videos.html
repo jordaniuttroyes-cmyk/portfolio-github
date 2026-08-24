@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Productions vidéo de Jordan Culot — Réalisations, montages et spots publicitaires.">
+  <title>Vidéos  Jordan Culot</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .nav-toggle { display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:4px; }
+    .nav-toggle span { display:block; width:22px; height:1.5px; background:var(--ink); transition:all 0.3s; }
+    @media (max-width:960px) {
+      .nav-toggle { display:flex; }
+      .nav-links { display:none; position:absolute; top:100%; left:0; right:0; background:rgba(245,240,232,0.97); backdrop-filter:blur(16px); border-bottom:1px solid var(--border); flex-direction:column; padding:16px 24px; gap:0; }
+      .nav-links.open { display:flex; }
+      .nav-link { padding:14px 0; border-bottom:1px solid var(--border); }
+    }
+
+    .videos-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:28px; }
+
+    @media (max-width:760px) {
+      .videos-grid { grid-template-columns:1fr; }
+    }
+
+    /* Correction forcée du lecteur de vidéo modale invisible */
+    .v-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 10, 10, 0.95);
+      backdrop-filter: blur(8px);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .v-modal.open {
+      display: flex;
+    }
+    .v-modal-content {
+      width: 100%;
+      max-width: 800px;
+      background: #111;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
+    .v-modal-header {
+      padding: 14px 20px;
+      color: #fff;
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      background: #161616;
+    }
+    .v-modal-body {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      background: #000;
+    }
+    .v-modal-body iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: none;
+    }
+    .v-modal-close {
+      position: absolute;
+      top: 20px; right: 20px;
+      background: none; border: none;
+      color: #fff; font-size: 24px;
+      cursor: pointer; opacity: 0.7;
+      transition: opacity 0.2s;
+      z-index: 10000;
+    }
+    .v-modal-close:hover { opacity: 1; }
+  </style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Aller au contenu principal</a>
+
+<nav>
+  <a href="../index.html" class="nav-logo">Jordan <em>Culot</em></a>
+  <div class="nav-links" id="navLinks">
+    <a href="projets.html"    class="nav-link">Projets</a>
+    <a href="dessins.html"    class="nav-link">Dessins</a>
+    <a href="photos.html"     class="nav-link">Photos</a>
+    <a href="videos.html"     class="nav-link active">Vidéos</a>
+    <a href="animations.html" class="nav-link">Animations</a>
+    <a href="apropos.html"    class="nav-link">À propos</a>
+    <a href="contact.html"    class="nav-link">Contact</a>
+  </div>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<main id="main-content">
+<section style="padding-top:140px; min-height:80vh;">
+  <div class="section-eyebrow reveal">Réalisations</div>
+  <h1 class="section-title reveal">Production <em>Audiovisuelle</em></h1>
+
+  <div class="videos-grid">
+
+    <div class="v-card reveal" onclick="openVid('monet')">
+      <div class="v-thumb">
+        <div class="v-yt-thumb" style="background-image:url('https://img.youtube.com/vi/e1MHH5uJZm4/maxresdefault.jpg');"></div>
+        <div class="v-gradient"></div>
+        <div class="v-play"><div class="v-circle"><div class="v-tri"></div></div></div>
+        <div class="v-tag-type">Storytelling / SAÉ</div>
+      </div>
+      <div class="v-body">
+        <div class="v-title">Claude Monet — Stratégie Digitale</div>
+        <div class="v-desc">Vidéo storytelling immersive simulant l'écosystème numérique contemporain du maître impressionniste.</div>
+        <div class="v-meta"><span>Premiere Pro</span><span>Stratégie</span></div>
+        <div style="margin-top:14px; position:relative; z-index:2;">
+          <a href="projet-monet.html" onclick="event.stopPropagation();" style="
+            font-family:'Josefin Sans',sans-serif; font-size:9px; letter-spacing:2px; text-transform:uppercase;
+            color:var(--gold); text-decoration:none; border-bottom:1px solid var(--gold);
+            padding-bottom:2px; transition:opacity 0.2s;
+          ">Voir la page projet →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="v-card reveal" onclick="openVid('insomnia')">
+      <div class="v-thumb">
+        <div class="v-yt-thumb" style="background-image:url('https://img.youtube.com/vi/z2GuNxogHw4/maxresdefault.jpg');"></div>
+        <div class="v-gradient"></div>
+        <div class="v-play"><div class="v-circle"><div class="v-tri"></div></div></div>
+        <div class="v-tag-type">Spot Publicitaire / SAÉ</div>
+      </div>
+      <div class="v-body">
+        <div class="v-title">Projet Insomnia — Escape Game</div>
+        <div class="v-desc">Spot publicitaire officiel pour un escape game urbain nocturne. Découvrez l'animatique et le rendu final.</div>
+        <div class="v-meta"><span>Premiere Pro</span><span>After Effects</span></div>
+        <div style="margin-top:14px; position:relative; z-index:2;">
+          <a href="projet-insomnia.html" onclick="event.stopPropagation();" style="
+            font-family:'Josefin Sans',sans-serif; font-size:9px; letter-spacing:2px; text-transform:uppercase;
+            color:var(--gold); text-decoration:none; border-bottom:1px solid var(--gold);
+            padding-bottom:2px; transition:opacity 0.2s;
+          ">Voir la page projet →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="v-card reveal" onclick="openVid('valo')">
+      <div class="v-thumb">
+        <div class="v-yt-thumb" style="background-image:url('https://img.youtube.com/vi/fIRQRpvKx4s/maxresdefault.jpg');"></div>
+        <div class="v-gradient"></div>
+        <div class="v-play"><div class="v-circle"><div class="v-tri"></div></div></div>
+        <div class="v-tag-type">Gaming / Rythme</div>
+      </div>
+      <div class="v-body">
+        <div class="v-title">Montage Valorant</div>
+        <div class="v-desc">Exercice de synchronisation audio-visuelle dynamique et d'effets de transition sur du gameplay compétitif.</div>
+        <div class="v-meta"><span>Premiere Pro</span><span>Dynamique</span></div>
+      </div>
+    </div>
+
+    <div class="v-card reveal" onclick="openVid('pepsi')">
+      <div class="v-thumb">
+        <div class="v-yt-thumb" style="background-image:url('https://img.youtube.com/vi/rPnf3pmz3gw/maxresdefault.jpg');"></div>
+        <div class="v-gradient"></div>
+        <div class="v-play"><div class="v-circle"><div class="v-tri"></div></div></div>
+        <div class="v-tag-type">Montage Rythmique</div>
+      </div>
+      <div class="v-body">
+        <div class="v-title">Montage Supernatural</div>
+        <div class="v-desc">Travail de découpe et d'harmonisation de clips vidéo synchronisés sur une bande-son publicitaire.</div>
+        <div class="v-meta"><span>Premiere Pro</span><span>Sound Design</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+</main>
+
+<div class="v-modal" id="vmodal" onclick="closeVid()">
+  <button class="v-modal-close" onclick="closeVid()" aria-label="Fermer la vidéo">✕</button>
+  <div class="v-modal-content" onclick="event.stopPropagation()">
+    <div class="v-modal-header" id="vmodalTitle">Titre de la vidéo</div>
+    <div class="v-modal-body" id="vmodalPlayer"></div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-brand">Jordan Culot</div>
+  <div class="footer-socials">
+    <a href="https://www.linkedin.com/in/jordan-culot-34a53b3ab" class="fsocial" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    <a href="https://github.com/" class="fsocial" target="_blank" rel="noopener noreferrer">GitHub</a>
+  </div>
+</footer>
+
+<script>
+  // Menu Mobile Toggle
+  document.getElementById('navToggle').addEventListener('click', function() {
+    var open = document.getElementById('navLinks').classList.toggle('open');
+    this.setAttribute('aria-expanded', open);
+  });
+
+  // Animation Intersection Observer
+  var revObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) e.target.classList.add('vis');
+    });
+  }, { threshold: 0.1 });
+  
+  document.querySelectorAll('.reveal').forEach(function(r) {
+    revObs.observe(r);
+  });
+
+  // Base de données des vidéos YouTube
+  var vids = {
+    monet: { title: 'Claude Monet — Stratégie Digitale', youtubeId: 'e1MHH5uJZm4' },
+    insomnia: { title: 'Projet Insomnia — Spot Publicitaire', youtubeId: 'z2GuNxogHw4' },
+    valo: { title: 'Montage Valorant', youtubeId: 'fIRQRpvKx4s' },
+    pepsi: { title: 'Montage Supernatural', youtubeId: 'rPnf3pmz3gw' }
+  };
+
+  function openVid(key) {
+    var v = vids[key];
+    document.getElementById('vmodalTitle').textContent = v.title;
+    document.getElementById('vmodalPlayer').innerHTML = '<iframe src="https://www.youtube.com/embed/' + v.youtubeId + '?autoplay=1&rel=0&modestbranding=1" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>';
+    document.getElementById('vmodal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeVid() {
+    document.getElementById('vmodalPlayer').innerHTML = '';
+    document.getElementById('vmodal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+</script>
+</body>
+</html>

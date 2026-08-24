@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Étude de cas approfondie du Projet Insomnia : Conception d'un écosystème numérique pour escape game nocturne. De l'animatique au spot publicitaire, Jordan Culot.">
+  <title>Projet Insomnia (SAÉ) — Jordan Culot</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+    .nav-toggle span{display:block;width:22px;height:1.5px;background:var(--ink);transition:all 0.3s}
+    @media(max-width:960px){
+      .nav-toggle{display:flex}
+      .nav-links{display:none;position:absolute;top:100%;left:0;right:0;background:rgba(245,240,232,0.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);flex-direction:column;padding:16px 24px;gap:0}
+      .nav-links.open{display:flex}
+      .nav-link{padding:14px 0;border-bottom:1px solid var(--border)}
+    }
+
+    .projet-layout {
+      display:grid;
+      grid-template-columns:1.1fr 0.9fr;
+      gap:60px;
+      align-items:start;
+    }
+
+    /* Section Vidéos Avant/Après */
+    .video-showcase {
+      display: flex;
+      flex-direction: column;
+      gap:36px;
+    }
+    .video-player-wrap {
+      border-radius:8px;
+      overflow:hidden;
+      border:1px solid var(--border);
+      box-shadow:0 12px 32px var(--shadow);
+      background:#0a0a0a;
+    }
+    .video-player-bar {
+      background:var(--cream2);
+      padding:10px 16px;
+      display:flex; align-items:center; gap:10px;
+      border-bottom:1px solid var(--border);
+    }
+    .vbar-dots { display:flex; gap:6px; }
+    .vbar-dot { width:10px; height:10px; border-radius:50%; }
+    .vbar-dot:nth-child(1){background:#ff5f57}
+    .vbar-dot:nth-child(2){background:#febc2e}
+    .vbar-dot:nth-child(3){background:#28c840}
+    .vbar-label {
+      font-family:'Josefin Sans',sans-serif;
+      font-size:10px; color:var(--muted); letter-spacing:1px;
+      flex:1;
+    }
+    .video-embed {
+      position:relative; padding-bottom:56.25%;
+    }
+    .video-embed iframe {
+      position:absolute; inset:0; width:100%; height:100%; border:none;
+    }
+
+    /* Info droite */
+    .projet-back {
+      display:inline-flex; align-items:center; gap:8px;
+      font-family:'Josefin Sans',sans-serif;
+      font-size:10px; letter-spacing:2px; text-transform:uppercase;
+      color:var(--gold); text-decoration:none;
+      margin-bottom:40px; transition:gap 0.2s;
+    }
+    .projet-back:hover { gap:14px; }
+
+    .projet-meta-row {
+      display:flex; flex-wrap:wrap; gap:24px;
+      margin-bottom:32px; padding-bottom:28px;
+      border-bottom:1px solid var(--border);
+    }
+    .projet-meta-label {
+      font-family:'Josefin Sans',sans-serif;
+      font-size:9px; letter-spacing:2px; text-transform:uppercase;
+      color:var(--gold); margin-bottom:5px;
+    }
+    .projet-meta-val {
+      font-family:'Cormorant Garamond',serif;
+      font-size:15px; color:var(--ink2);
+    }
+
+    .projet-title {
+      font-family:'Playfair Display',serif;
+      font-size:clamp(28px,4vw,44px);
+      font-weight:700; line-height:1.1;
+      color:var(--ink); margin-bottom:20px;
+    }
+    .projet-title em { color:var(--gold); font-style:italic; }
+
+    .projet-desc {
+      font-family:'Cormorant Garamond',serif;
+      font-size:16.5px; color:var(--ink2);
+      line-height:1.8; margin-bottom:24px;
+      text-align:justify;
+    }
+
+    .tech-highlights {
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:12px; margin-bottom:32px;
+    }
+    .tech-card {
+      background:#fff; border:1px solid var(--border);
+      border-radius:4px; padding:14px 16px;
+      display:flex; flex-direction:column; gap:4px;
+    }
+    .tech-card-icon { font-size:18px; margin-bottom:2px; }
+    .tech-card-label {
+      font-family:'Josefin Sans',sans-serif;
+      font-size:8px; letter-spacing:2px; text-transform:uppercase;
+      color:var(--gold);
+    }
+    .tech-card-val {
+      font-family:'Cormorant Garamond',serif;
+      font-size:14px; color:var(--ink2); line-height:1.4;
+    }
+
+    .features-label {
+      font-family:'Josefin Sans',sans-serif;
+      font-size:9px; letter-spacing:2px; text-transform:uppercase;
+      color:var(--gold); margin-bottom:14px;
+      margin-top:10px;
+    }
+    .features-list {
+      list-style:none; display:flex; flex-direction:column; gap:10px;
+      margin-bottom:32px;
+    }
+    .features-list li {
+      font-family:'Cormorant Garamond',serif;
+      font-size:16px; color:var(--ink2);
+      display:flex; align-items:baseline; gap:10px;
+    }
+    .features-list li::before { content:'•'; color:var(--gold); flex-shrink:0; font-size:12px; margin-right:8px; }
+
+    .projet-tools { display:flex; flex-wrap:wrap; gap:8px; }
+    .projet-tool {
+      font-family:'Josefin Sans',sans-serif;
+      font-size:9px; letter-spacing:1.5px; text-transform:uppercase;
+      padding:6px 14px; border:1px solid var(--border);
+      color:var(--muted); border-radius:2px;
+    }
+
+    @media(max-width:860px){
+      .projet-layout { grid-template-columns:1fr; gap:40px; }
+    }
+  </style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Aller au contenu principal</a>
+<nav>
+  <a href="../index.html" class="nav-logo">Jordan <em>Culot</em></a>
+  <div class="nav-links" id="navLinks">
+    <a href="projets.html"    class="nav-link active">Projets</a>
+    <a href="dessins.html"    class="nav-link">Dessins</a>
+    <a href="photos.html"     class="nav-link">Photos</a>
+    <a href="videos.html"     class="nav-link">Vidéos</a>
+    <a href="animations.html" class="nav-link">Animations</a>
+    <a href="apropos.html"    class="nav-link">À propos</a>
+    <a href="contact.html"    class="nav-link">Contact</a>
+  </div>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<main id="main-content">
+<section style="padding-top:140px;">
+  <a href="projets.html" class="projet-back reveal">← Retour aux projets</a>
+
+  <div class="projet-layout">
+
+    <div class="video-showcase reveal">
+      
+      <div>
+        <div class="features-label" style="margin-bottom:8px;">[Étape 1 — Avant] Animatique de Pré-production</div>
+        <div class="video-player-wrap">
+          <div class="video-player-bar">
+            <div class="vbar-dots"><div class="vbar-dot"></div><div class="vbar-dot"></div><div class="vbar-dot"></div></div>
+            <div class="vbar-label">Storyboard Animé &amp; Intentions de Réalisation</div>
+          </div>
+          <div class="video-embed">
+            <iframe src="https://www.youtube.com/embed/bwS6VewKdSg?rel=0&modestbranding=1" allowfullscreen title="Animatique préparatoire"></iframe>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="features-label" style="margin-bottom:8px;">[Étape 2 — Après] Rendu Finalisé</div>
+        <div class="video-player-wrap">
+          <div class="video-player-wrap" style="box-shadow: 0 20px 40px rgba(184,151,58,0.15);">
+          <div class="video-player-bar">
+            <div class="vbar-dots"><div class="vbar-dot"></div><div class="vbar-dot"></div><div class="vbar-dot"></div></div>
+            <div class="vbar-label">Spot Publicitaire Officiel — Insomnia</div>
+          </div>
+          <div class="video-embed">
+            <iframe src="https://www.youtube.com/embed/z2GuNxogHw4?rel=0&modestbranding=1" allowfullscreen title="Spot Publicitaire Final"></iframe>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="reveal" style="transition-delay: 0.1s;">
+      <div class="projet-meta-row">
+        <div>
+          <div class="projet-meta-label">Catégorie</div>
+          <div class="projet-meta-val">Web design · Audiovisuel</div>
+        </div>
+        <div>
+          <div class="projet-meta-label">Contexte</div>
+          <div class="projet-meta-val">SAÉ Finale · BUT MMI</div>
+        </div>
+        <div>
+          <div class="projet-meta-label">Livrables</div>
+          <div class="projet-meta-val">Sites web, Animatique &amp; Pub</div>
+        </div>
+      </div>
+
+      <h1 class="projet-title">Projet <em>Insomnia</em></h1>
+
+      <p class="projet-desc">
+        Dans le cadre de la SAÉ finale de BUT MMI, réalisée en équipe, nous avons conçu l'écosystème numérique complet d'<strong>Insomnia</strong>, un concept fictif immersif d'escape game nocturne à l'échelle d'une ville entière. Ce projet à 360° nécessitait une cohérence parfaite entre les supports web et l'identité de marque audiovisuelle.
+      </p>
+      
+      <p class="projet-desc">
+        Cette page met en lumière notre méthodologie de production audiovisuelle à travers un comparatif direct. L'<strong>animatique préparatoire</strong> a d'abord permis de poser la narration, le minutage sonore, le rythme du montage et les intentions de cadrage. Cette base structurelle rigoureuse a guidé l'ensemble de notre équipe lors du tournage réel, garantissant l'efficacité visuelle et l'angoisse psychologique du <strong>spot publicitaire finalisé</strong>.
+      </p>
+
+      <div class="features-label">Architecture du Projet</div>
+      <div class="tech-highlights">
+        <div class="tech-card">
+          <div class="tech-card-icon">🎬</div>
+          <div class="tech-card-label">Production &amp; Réalisation</div>
+          <div class="tech-card-val">Tournage de nuit en conditions réelles, direction d'acteurs et post-production complète du spot publicitaire.</div>
+        </div>
+        <div class="tech-card">
+          <div class="tech-card-icon">✏️</div>
+          <div class="tech-card-label">Pré-production graphique</div>
+          <div class="tech-card-val">Création de l'animatique illustrative pour fixer le rythme narratif et valider le découpage technique en amont.</div>
+        </div>
+      </div>
+
+      <div class="features-label">Compétences transversales mobilisées</div>
+      <ul class="features-list">
+        <li><strong>Scénarisation &amp; Découpage technique :</strong> Traduction du concept en plans séquences et établissement du script sonore (voix off et bruitages).</li>
+        <li><strong>Gestion de tournage nocturne :</strong> Prise de vue sous contrainte de faible luminosité, gestion de l'éclairage artificiel et directivité des micros.</li>
+        <li><strong>Post-production avancée :</strong> Montage dynamique, étalonnage colorimétrique pour renforcer l'aspect oppressant, et sound design immersif sous Premiere Pro.</li>
+        <li><strong>Direction Artistique :</strong> Maintien d'un univers sombre et mystérieux, en parfaite adéquation avec la charte graphique web développée en parallèle.</li>
+      </ul>
+
+      <div class="features-label">Logiciels &amp; Outils utilisés</div>
+      <div class="projet-tools">
+        <span class="projet-tool">Premiere Pro</span>
+        <span class="projet-tool">After Effects</span>
+        <span class="projet-tool">Adobe Illustrator</span>
+        <span class="projet-tool">Adobe Photoshop</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="footer-brand">Jordan Culot</div>
+  <div class="footer-socials">
+    <a href="https://www.linkedin.com/in/jordan-culot-34a53b3ab" class="fsocial" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    <a href="https://github.com/" class="fsocial" target="_blank" rel="noopener noreferrer">GitHub</a>
+  </div>
+</footer>
+<script>
+  document.getElementById('navToggle').addEventListener('click', function() {
+    const open = document.getElementById('navLinks').classList.toggle('open');
+    this.setAttribute('aria-expanded', open);
+  });
+  const revObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+  }, { threshold: 0.05 });
+  document.querySelectorAll('.reveal').forEach(r => revObs.observe(r));
+</script>
+</body>
+</html>

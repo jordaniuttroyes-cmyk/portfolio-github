@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Illustration éditoriale : réinterprétation d'une couverture du New Yorker mêlant esthétique vectorielle et culture urbaine, Jordan Culot.">
+  <title>Couverture The New Yorker  Jordan Culot</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+    .nav-toggle span{display:block;width:22px;height:1.5px;background:var(--ink);transition:all 0.3s}
+    @media(max-width:960px){
+      .nav-toggle{display:flex}
+      .nav-links{display:none;position:absolute;top:100%;left:0;right:0;background:rgba(245,240,232,0.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);flex-direction:column;padding:16px 24px;gap:0}
+      .nav-links.open{display:flex}
+      .nav-link{padding:14px 0;border-bottom:1px solid var(--border)}
+    }
+
+    .projet-back {
+      display:inline-flex; align-items:center; gap:8px;
+      font-family:'Josefin Sans',sans-serif;
+      font-size:10px; letter-spacing:2px; text-transform:uppercase;
+      color:var(--gold); text-decoration:none;
+      margin-bottom:40px; transition:gap 0.2s;
+    }
+    .projet-back:hover { gap:14px; }
+
+    .projet-hero {
+      display:grid;
+      grid-template-columns:0.85fr 1.15fr;
+      gap:80px;
+      align-items:start;
+    }
+
+    /* Image principale style couverture de magazine */
+    .img-main {
+      border-radius:6px; overflow:hidden;
+      border:1px solid var(--border);
+      box-shadow:0 30px 70px var(--shadow);
+      cursor:zoom-in;
+    }
+    .img-main img {
+      width:100%; display:block;
+      transition:transform 0.5s;
+    }
+    .img-main:hover img { transform:scale(1.015); }
+
+    /* Infos droite */
+    .projet-meta-row {
+      display:flex; flex-wrap:wrap; gap:28px;
+      margin-bottom:32px; padding-bottom:28px;
+      border-bottom:1px solid var(--border);
+    }
+    .projet-meta-label {
+      font-family:'Josefin Sans',sans-serif;
+      font-size:9px; letter-spacing:2px; text-transform:uppercase;
+      color:var(--gold); margin-bottom:5px;
+    }
+    .projet-meta-val {
+      font-family:'Cormorant Garamond',serif;
+      font-size:15px; color:var(--ink2);
+    }
+
+    .projet-title {
+      font-family:'Playfair Display',serif;
+      font-size:clamp(28px,4vw,48px);
+      font-weight:700; line-height:1.1;
+      color:var(--ink); margin-bottom:20px;
+    }
+    .projet-title em { color:var(--gold); font-style:italic; }
+
+    .projet-desc {
+      font-family:'Cormorant Garamond',serif;
+      font-size:17px; color:var(--ink2);
+      line-height:1.85; margin-bottom:32px;
+    }
+
+    /* Cards techniques */
+    .tech-highlights {
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:12px; margin-bottom:32px;
+    }
+    .tech-card {
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:4px;
+      padding:14px 16px;
+      display:flex; flex-direction:column; gap:4px;
+    }
+    .tech-card-label {
+      font-family:'Josefin Sans',sans-serif;
+      font-size:8px; letter-spacing:2px; text-transform:uppercase;
+      color:var(--gold);
+    }
+    .tech-card-val {
+      font-family:'Cormorant Garamond',serif;
+      font-size:14px; color:var(--ink2); line-height:1.4;
+    }
+
+    .features-label {
+      font-family:'Josefin Sans',sans-serif;
+      font-size:9px; letter-spacing:2px; text-transform:uppercase;
+      color:var(--gold); margin-bottom:14px;
+    }
+    .features-list {
+      list-style:none; display:flex; flex-direction:column; gap:10px;
+      margin-bottom:32px;
+    }
+    .features-list li {
+      font-family:'Cormorant Garamond',serif;
+      font-size:16px; color:var(--ink2);
+      display:flex; align-items:baseline; gap:10px;
+    }
+    .features-list li::before { content:'•'; color:var(--gold); flex-shrink:0; font-size:14px; }
+
+    .projet-tools-label {
+      font-family:'Josefin Sans',sans-serif;
+      font-size:9px; letter-spacing:2px; text-transform:uppercase;
+      color:var(--gold); margin-bottom:12px;
+    }
+    .projet-tools { display:flex; flex-wrap:wrap; gap:8px; }
+    .projet-tool {
+      font-family:'Josefin Sans',sans-serif;
+      font-size:9px; letter-spacing:1.5px; text-transform:uppercase;
+      padding:6px 14px; border:1px solid var(--border);
+      color:var(--muted); border-radius:2px;
+    }
+
+    /* Palette couleurs */
+    .palette-row { display:flex; gap:10px; margin-bottom:32px; flex-wrap:wrap; }
+    .swatch { display:flex; flex-direction:column; align-items:center; gap:6px; }
+    .swatch-color { width:44px; height:44px; border-radius:50%; border:1px solid var(--border); box-shadow:0 4px 10px var(--shadow); }
+    .swatch-code { font-family:'Josefin Sans',sans-serif; font-size:8px; letter-spacing:1px; color:var(--muted); }
+
+    /* Lightbox */
+    .lightbox {
+      position:fixed; inset:0; z-index:200;
+      background:rgba(10,8,4,0.94);
+      display:none; align-items:center; justify-content:center;
+      padding:40px; cursor:zoom-out;
+    }
+    .lightbox.open { display:flex; }
+    .lightbox img { max-width:100%; max-height:88vh; border-radius:4px; box-shadow:0 30px 80px rgba(0,0,0,0.6); }
+    .lightbox-close {
+      position:absolute; top:24px; right:32px;
+      font-family:'Josefin Sans',sans-serif;
+      font-size:10px; letter-spacing:2px; text-transform:uppercase;
+      background:transparent; color:rgba(255,255,255,0.7);
+      border:1px solid rgba(255,255,255,.2); padding:8px 16px;
+      cursor:pointer; border-radius:2px; transition:all 0.2s;
+    }
+    .lightbox-close:hover { color:var(--gold); border-color:var(--gold); }
+
+    @media(max-width:860px){
+      .projet-hero { grid-template-columns:1fr; gap:40px; }
+      .tech-highlights { grid-template-columns:1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Aller au contenu principal</a>
+<nav>
+  <a href="../index.html" class="nav-logo">Jordan <em>Culot</em></a>
+  <div class="nav-links" id="navLinks">
+    <a href="projets.html"    class="nav-link active">Projets</a>
+    <a href="dessins.html"    class="nav-link">Dessins</a>
+    <a href="photos.html"     class="nav-link">Photos</a>
+    <a href="videos.html"     class="nav-link">Vidéos</a>
+    <a href="animations.html" class="nav-link">Animations</a>
+    <a href="apropos.html"    class="nav-link">À propos</a>
+    <a href="contact.html"    class="nav-link">Contact</a>
+  </div>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<main id="main-content">
+<section style="padding-top:140px;">
+  <a href="projets.html" class="projet-back reveal">← Retour aux projets</a>
+
+  <div class="projet-hero">
+
+    <!-- Image gauche -->
+    <div class="reveal">
+      <div class="img-main" onclick="openLight('../images/newyorker_cover.jpg')">
+        <img src="../images/newyorker_cover.jpg" alt="Couverture réinventée du magazine The New Yorker, illustration vectorielle d'une rue de New York">
+      </div>
+    </div>
+
+    <!-- Infos droite -->
+    <div class="reveal">
+      <div class="projet-meta-row">
+        <div>
+          <div class="projet-meta-label">Catégorie</div>
+          <div class="projet-meta-val">Design graphique · Illustration éditoriale</div>
+        </div>
+        <div>
+          <div class="projet-meta-label">Contexte</div>
+          <div class="projet-meta-val">Atelier · BUT MMI</div>
+        </div>
+        <div>
+          <div class="projet-meta-label">Support</div>
+          <div class="projet-meta-val">Couverture de magazine</div>
+        </div>
+      </div>
+
+      <h1 class="projet-title">Couverture <em>The New Yorker</em></h1>
+
+      <p class="projet-desc">
+        Exercice de style consistant à réinventer une couverture du <strong>New Yorker</strong> en conservant les codes graphiques du magazine (masthead, mise en page verticale, prix, date), tout en y injectant un univers plus personnel.<br><br>
+        La rue new-yorkaise est traitée en aplats vectoriels bleu et cyan, ponctuée d'un rouge qui fait écho au logo du titre. Une silhouette solitaire traverse la scène, tandis que les façades se couvrent de tags reprenant les expressions et l'argot de la génération actuelle, en contraste avec le classicisme du magazine.
+      </p>
+
+      <div class="features-label">Partis pris graphiques</div>
+      <div class="tech-highlights">
+        <div class="tech-card">
+          <div class="tech-card-label">Perspective urbaine</div>
+          <div class="tech-card-val">Rue en enfilade avec point de fuite central, façades en aplats et ombres géométriques</div>
+        </div>
+        <div class="tech-card">
+          <div class="tech-card-label">Palette restreinte</div>
+          <div class="tech-card-val">Bleu, cyan, blanc et un rouge qui rappelle le logo historique du magazine</div>
+        </div>
+        <div class="tech-card">
+          <div class="tech-card-label">Typographie</div>
+          <div class="tech-card-val">Reprise du logotype serif emblématique du New Yorker pour ancrer la référence</div>
+        </div>
+        <div class="tech-card">
+          <div class="tech-card-label">Tags et graffitis</div>
+          <div class="tech-card-val">Lettrage street-art disséminé sur les murs, en contraste avec l'esthétique classique du titre</div>
+        </div>
+      </div>
+
+      <div class="features-label">Nuancier</div>
+      <div class="palette-row">
+        <div class="swatch"><div class="swatch-color" style="background:#0f6cff;"></div><div class="swatch-code">#0F6CFF</div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#5be3f0;"></div><div class="swatch-code">#5BE3F0</div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#c11c47;"></div><div class="swatch-code">#C11C47</div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#ffffff;border:1px solid var(--border);"></div><div class="swatch-code">#FFFFFF</div></div>
+      </div>
+
+      <div class="features-label">Compétences mobilisées</div>
+      <ul class="features-list">
+        <li>Illustration vectorielle et construction d'une perspective urbaine</li>
+        <li>Recherche d'une palette colorée cohérente avec une identité éditoriale existante</li>
+        <li>Composition d'une couverture de presse dans le respect d'un gabarit imposé</li>
+        <li>Mise en scène d'un personnage au sein d'un décor urbain</li>
+      </ul>
+
+      <div class="projet-tools-label">Logiciels utilisés</div>
+      <div class="projet-tools">
+        <span class="projet-tool">Adobe Illustrator</span>
+        <span class="projet-tool">Illustration vectorielle</span>
+        <span class="projet-tool">Composition éditoriale</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+</main>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLight()">
+  <button class="lightbox-close" onclick="closeLight()">Fermer</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<footer>
+  <div class="footer-brand">Jordan Culot</div>
+  <div class="footer-socials">
+    <a href="https://www.linkedin.com/in/jordan-culot-34a53b3ab" class="fsocial" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    <a href="https://github.com/" class="fsocial" target="_blank" rel="noopener noreferrer">GitHub</a>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('navToggle').addEventListener('click', function() {
+    const open = document.getElementById('navLinks').classList.toggle('open');
+    this.setAttribute('aria-expanded', open);
+  });
+  const revObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+  }, { threshold: 0.05 });
+  document.querySelectorAll('.reveal').forEach(r => revObs.observe(r));
+
+  function openLight(src) {
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLight() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLight(); });
+</script>
+</body>
+</html>
